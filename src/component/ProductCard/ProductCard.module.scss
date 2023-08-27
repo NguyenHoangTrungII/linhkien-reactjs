@@ -1,0 +1,327 @@
+.wrapper{
+    padding: 6px 20px;
+}
+.product {
+    position: relative;
+    margin: 15px 0px;
+    -webkit-box-shadow: 0px 0px 0px 0px #E4E7ED, 0px 0px 0px 1px #E4E7ED;
+    box-shadow: 0px 0px 0px 0px #E4E7ED, 0px 0px 0px 1px #E4E7ED;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+  }
+  
+  .product:hover {
+    -webkit-box-shadow: 0px 0px 6px 0px #E4E7ED, 0px 0px 0px 2px #DB4444;
+    box-shadow: 0px 0px 6px 0px #E4E7ED, 0px 0px 0px 2px #DB4444;
+  }
+
+  
+  
+  .product .product-img {
+    align-items: center;
+    position: relative;
+    width: 100%;
+
+    .img-product>img{
+        width: 70%;
+    }
+
+    .img-product{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 20px;
+    }
+  }
+  
+//   .product .product-img>img {
+//     // align-items: center;
+//     width: 80%;
+//   }
+  
+  .product .product-img .product-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    
+  }
+  
+  .product .product-img .product-label>span {
+    border: 2px solid;
+    padding: 2px 10px;
+    font-size: 14px;
+  }
+  
+  .product .product-img .product-label>span.sale {
+    background-color: #FFF;
+    border-color: #DB4444;
+    color: #DB4444;
+  }
+  
+  .product .product-img .product-label>span.new {
+    background-color: #DB4444;
+    border-color: #DB4444;
+    color: #FFF;
+  }
+  
+  .product .product-img .product-label>span.hot {
+    background-color: #DB4444;
+    border-color: #DB4444;
+    color: #FFF;
+  }
+  
+  .product .product-body .product-band {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 20%;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .product .product-body .product-another {
+    padding-top: 24px;
+  }
+  
+  .product .product-body .product-band>span {
+    padding: 2px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+  }
+  
+  .product .product-body {
+    position: relative;
+    padding: 15px;
+    background-color: #FFF;
+    text-align: center;
+    z-index: 20;
+  }
+  
+  .product .product-body .product-category {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #8D99AE;
+  }
+  
+  .product .product-body .product-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .product .product-body .product-name a {
+    color: #000;
+  }
+  
+  .product .product-body .product-name>a {
+    font-weight: 700;
+  }
+  
+  .product .product-body .product-name>a:hover,
+  .product .product-body .product-name>a:focus {
+    color: var(--primary-color);
+  }
+  
+  .product .product-body .product-price {
+    color: #DB4444;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .product .product-body .product-price .product-old-price {
+    font-size: 70%;
+    font-weight: 500;
+    color: #8D99AE;
+  }
+  
+  .product .product-body .product-rating {
+    position: relative;
+    margin: 15px 0px 10px;
+    height: 20px;
+  }
+  
+  .product .product-body .product-rating>i {
+    position: relative;
+    width: 14px;
+    margin-right: 0px;
+    background: #FFF;
+    color: #E4E7ED;
+    z-index: 10;
+  }
+  
+//   .product .product-body .product-rating>i.fa-star {
+//     color: rgb(255, 255, 81);
+//   }
+  
+//   .product .product-body .product-rating:after {
+//     content: "";
+//     position: absolute;
+//     top: 50%;
+//     left: 0;
+//     right: 0;
+//     -webkit-transform: translateY(-50%);
+//     -ms-transform: translateY(-50%);
+//     transform: translateY(-50%);
+//     height: 1px;
+//     background-color: #E4E7ED;
+//   }
+  
+  .product:hover .product-img .product-chose {
+    bottom: 0;
+    background-color: #000;
+    .add-to-cart{
+        background-color: var(--black);
+        font-weight: 900;
+        width: 100%;
+    }
+  }
+  
+  /*.product-img {
+    height: 270px;
+    position: relative;
+    overflow: hidden;
+    background-position: center center;
+  }*/
+  
+  .product-chose {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    left: 0;
+    bottom: -50px;
+    width: 100%;
+    height: 40px;
+    
+    text-align: center;
+    -webkit-transition: all, 0.5s;
+    -moz-transition: all, 0.5s;
+    -ms-transition: all, 0.5s;
+    -o-transition: all, 0.5s;
+    transition: all, 0.5s;
+    background-color: transparent;
+
+    .add-to-cart{
+        color: #fff;
+    }
+  }
+  
+  .product-chose li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .product-chose li:last-child {
+    margin-right: 0;
+  }
+  
+  .product-chose li:hover a {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+//   .product-chose li:hover a i {
+//     color: #ffffff;
+//     transform: rotate(360deg);
+//   }
+  
+  .product-chose li a {
+    font-size: 16px;
+    color: #1c1c1c;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid #ebebeb;
+    background: #ffffff;
+    display: block;
+    border-radius: 50%;
+    -webkit-transition: all, 0.5s;
+    -moz-transition: all, 0.5s;
+    -ms-transition: all, 0.5s;
+    -o-transition: all, 0.5s;
+    transition: all, 0.5s;
+  }
+  
+  .product-chose li a i {
+    position: relative;
+    transform: rotate(0);
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+  }
+
+  .star-icon{
+    font-size: 20px;
+    color: #FFAD33;
+  }
+
+
+.action{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.detail-list{
+    padding-top: 20px;
+
+    
+}
+
+.wish-icon, .detail-icon{   
+    background-color: #a5abb4;
+    padding: 6px;
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 16px;
+
+    
+
+    
+}
+
+
+.detail-icon{
+    background-color: #a5abb4;
+
+    transform: rotate(0);
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+
+    &:hover{
+        color: #DB4444;
+        transform: rotate(360deg);
+    }
+}
+
+.wish-icon{
+    background-color: #a5abb4;
+
+    transform: rotate(0);
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+
+    &:hover{
+        color: #DB4444;
+        transform: rotate(360deg);
+    }
+}
+
+  

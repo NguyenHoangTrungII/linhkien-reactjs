@@ -1,0 +1,135 @@
+.wrapper{
+    width: 100%;
+    min-height: 440px;
+    background-color: var(--black);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--white);
+}
+
+.wrapper{
+    color: var(--white);
+
+    display: flex;
+    justify-content: space-between;
+
+    h5{
+        // line-height: 0;
+        padding-bottom: 18px;
+    }
+
+    h3{
+        padding-bottom: 20px;
+    }
+
+    h6{
+        padding-bottom: 10px;
+    }
+
+   
+
+    
+
+}
+
+// .part-1{
+//     display: flex;
+//     flex-direction: column;
+//     align-content: space-between;
+// }
+
+.tittle{
+    list-style: none;
+    padding-bottom: 20px;
+}
+
+.btn-send-mail{
+    background-color: var(--black);
+    color: #fafafa;
+    font-weight: 50;
+}
+
+.icon-send-mail{
+    font-size: 24px;
+}
+
+
+.get-it-on{
+    display: flex;
+    justify-content: space-between;
+    // flex-wrap: wrap;
+    .place-dowload{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        width: 100%;
+        padding-left: 20px;
+    }
+}
+
+
+.social{
+    display: flex;
+    justify-content: space-between;
+
+    padding-top: 20px;
+}
+
+.icon-social{
+    font-size: 24px;
+}
+
+
+@media only screen and (max-width: 760px) and (min-width: 581px) {
+    .inner{
+        padding-top: 60px;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 581px) {
+
+    .inner{
+        padding-top: 40px;
+        text-align: center;
+
+       
+    }
+
+    .get-it-on{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        .place-dowload{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+    
+            // width: 100%;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        
+    }
+
+    .social{
+        display: flex;
+        justify-content: space-around;
+
+        // width: 50%;
+        padding-top: 20px;
+    }
+
+    .tittle{
+       font-weight: 900;
+       color: rgb(196, 188, 188);
+    }
+    
+}

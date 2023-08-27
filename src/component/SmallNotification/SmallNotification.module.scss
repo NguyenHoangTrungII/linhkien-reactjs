@@ -1,0 +1,27 @@
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-between;
+    align-items: center;
+
+    
+    
+}
+
+.element{
+    height: 40px;
+    width: 20px;
+    background-color: #DB4444;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.notify{
+    font-size: 16px;
+    font-weight: 900;
+    color: #DB4444;
+}
+
+.title{
+    font-size: 36px;
+}

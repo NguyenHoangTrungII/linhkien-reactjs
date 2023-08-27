@@ -1,0 +1,122 @@
+.wrapper{
+    font-size: 1.6rem;
+    font-weight: 500;
+    width: 422px;
+
+}
+
+.product-detail{
+    height: 108px;
+    overflow-y: scroll;
+
+    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+    margin-bottom: 30px;
+
+}
+
+
+
+
+ ::-webkit-scrollbar {
+    width: 4px; 
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+.card-product{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-product:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.img-product{
+    width: 54px;
+    height: 54px;
+}
+
+.payment{
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment{
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+
+
+}
+
+.payment:not(:last-child){
+    border-bottom: 3px solid rgba(35, 34, 34, 0.09);
+}
+
+.text{}
+
+.price{
+
+}
+
+.payment-bank{
+  display: flex;
+  justify-content: space-between; 
+}
+
+.payment-bank, .COD{
+  margin-bottom: 30px;
+}
+
+.bank-img{
+  
+  img {
+    max-width: 42px;
+    max-height: 28px;
+  }   
+
+  img + img {
+    margin: 0 7px;
+  }
+
+  
+}
+
+.coupon-apply{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.coupon-input{
+  margin-right: 30px;
+  flex: 1;
+}
+
+.coupon-btn{
+  padding: 0 50px;
+}
+
+.placeorder-btn{
+  padding: 9px 50px;
+}
+
+
+
+
+
+
+

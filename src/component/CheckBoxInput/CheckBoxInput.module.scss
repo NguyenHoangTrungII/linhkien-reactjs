@@ -1,0 +1,74 @@
+
+.checkbox-container {
+    
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-input {
+    margin-right: 18px; 
+  }
+  
+  .text-style {
+    font-size: 1.7rem;
+    font-weight: 300;
+
+  }
+  
+//   .checkbox-input:checked + .text-style {
+//     font-weight: bold; 
+//   }
+  
+  /* Tuỳ chỉnh kiểu checkbox */
+  .checkbox-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+.checkbox-input:checked {
+    background-color: #DB4444;
+    border-color:#DB4444;
+  }
+  
+  .checkbox-input::after {
+    content: '\2713';
+    font-size: 18px;
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white); 
+    display: none;
+  }
+  
+  .checkbox-input:checked::after {
+    display: block;
+  }
+
+
+  .checkbox-input:checked:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+ 
+  .checkbox-inputcheck:hover {
+    background-color: rgba(var(--primary), var(--primary), var(--primary), 0.5);
+    border-color: var(--primary);
+  }
+
+  
+  

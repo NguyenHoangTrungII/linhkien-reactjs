@@ -1,0 +1,71 @@
+.wrapper-nextarrow{
+  position: absolute;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(54, 53, 53, 0.2);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  background-color:var(--white);
+  top: -50px;
+  right: 40px;
+  color: var(--black);
+  &:hover{
+    color: var(--black);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+}
+
+.nextArrow{
+  font-size: 20px;
+
+}
+
+// .prevIcon{
+//     position: absolute;
+//     background-color: red;
+//     border: 1px solid rgb(73, 69, 69);
+//     height: 32px;
+//     width: 32px;
+//     border-radius: 50%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     // top: 0;
+//     // right: 0;
+//     font-size: 20px;
+//     color: var(--black);
+//     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+//     z-index: 9999999;
+// }
+
+
+/* REACT SLICK ARROW CUSTOM CSS */
+.react__slick__slider__parent {
+    position: relative;
+  }
+  
+  .react__slick__slider__parent .slick-prev,
+  .react__slick__slider__parent .slick-next {
+    position: absolute;
+    top: 50%;
+    display: none;
+  }
+  .react__slick__slider__parent .slick-prev {
+    color: black;
+    z-index: 1;
+  }
+  .react__slick__slider__parent .slick-next {
+    border-radius: 50%;
+    color: black;
+    z-index: 1;
+  }
+  
+  .react__slick__slider__parent .slick-prev:before, .slick-next:before {
+    color: black;
+  }
+
+
+

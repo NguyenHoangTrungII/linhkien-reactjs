@@ -1,0 +1,236 @@
+.wrapper{
+    --search-border-radius: 92px;
+    --search-height: 46px;
+    --search-top-spacer: 9px;
+    --search-button-width: 52px;
+
+    position: fixed;
+    // top: 0;
+    // bottom: 0;
+    // left: 0;
+    z-index: 9999;
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+
+    width: 100%;
+    height: var(--default-layout-header-height, 60px);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+    background-color: var(--white);
+
+
+
+    
+    
+}
+
+.inner{
+    // height: 100%;
+    // width: 1194px;
+    // width: var(--default-layout-width, 1150px);
+    // padding: 0 var(--default-layout-horizontal-spacer);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    display: flex;
+}
+
+.action{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cart, .bell, .wishlist {
+    padding: 0  20px 0 10px;
+
+}
+
+.cart-icon,
+.bell-icon, 
+.wishlist-icon{
+    position: relative;
+
+    font-size: 28px;
+    padding: 0  20px 0 10px;
+
+    color: rgba(22, 24, 35, 0.75);
+
+}
+
+
+.cart-icon:not([value=""])::after {
+    content: attr(value);
+    position: absolute;
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    color: var(--white);
+
+    
+    top: -5px;
+    right: 4px;
+    // bottom: 100px; 
+
+    width: 30px;
+    // padding: 0 8px 0 8px;
+    height: 18px;
+    background-color: #c00;
+    // border-radius: 50%;
+    border-radius: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.bell-icon:not([value=""])::after {
+    content: attr(value);
+
+    position: absolute;
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    color: var(--white);
+
+    
+    top: -5px;
+    right: 4px;
+    // bottom: 100px; 
+
+    width: 30px;
+    height: 18px;
+    background-color: #c00;
+    // border-radius: 50%;
+    border-radius: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.wishlist-icon:not([value=""])::after {
+    content: attr(value);
+
+    position: absolute;
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    color: var(--white);
+
+    
+    top: -5px;
+    right: 4px;
+    // bottom: 100px; 
+
+    width: 30px;
+    height: 18px;
+    background-color: #c00;
+    // border-radius: 50%;
+    border-radius: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cart-title, .cart-bottom, .notify-title{
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    color: rgba(22, 24, 35, 0.5);
+
+}
+
+.notify-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    color: rgba(22, 24, 35, 0.5);
+}
+
+
+
+
+
+
+// .cart-qty{
+//     position: absolute;
+//     font-size: 16px;
+
+//     top: -10px;
+//     right: 6px;
+
+//     color: rgba(22, 24, 35, 0.75);
+// }
+.user-avatar{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1199px){
+
+}
+
+@media only screen and (max-width: 768px)  {
+    
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    .logo{
+        height: 40px;
+        width: 40px;
+        // display: none;
+    }
+   
+
+   
+    
+    
+}
+
+@media only screen and (max-width: 767px) {
+    
+
+    .action{
+        display: none;
+    }
+
+    .inner{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+}
+
+
+// @media only screen and (max-width: 610px){
+//     .logo{
+//         height: 20px;
+//         width: 20px;
+//         // display: none;
+//     }
+// }
+
+@media only screen and (max-width: 479px){
+    .inner{
+        // height: 100%;
+        // width: 1194px;
+        // width: var(--default-layout-width, 1150px);
+        // padding: 0 var(--default-layout-horizontal-spacer);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+}
