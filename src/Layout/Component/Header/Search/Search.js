@@ -12,7 +12,7 @@ import * as searchService from '~/services/searchService';
 
 const cx = classNames.bind(styles);
 
-function Search() {
+function Search({ className = '' }) {
     const [showResult, setShowResult] = useState(false);
     const [searchResult, setsearchResult] = useState([]);
 
@@ -67,6 +67,9 @@ function Search() {
 
         <HeadlessTippy
             interactive
+            placement="top-start"
+            offset={[-10, 0]}
+            // inlinePositioning={true}
             visible={showResult && searchResult.length > 0}
             onClickOutside={handleHideResult}
             render={(attrs) => (
@@ -81,7 +84,7 @@ function Search() {
                 </div>
             )}
         >
-            <div className={cx('search')}>
+            <div className={cx('search', className)}>
                 <input
                     ref={inputRef}
                     value={searchValue}

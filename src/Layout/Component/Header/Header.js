@@ -1,8 +1,26 @@
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import { BellOutlined } from '@ant-design/icons/lib/icons';
+import {
+    BellOutlined,
+    CaretDownOutlined,
+    CloseOutlined,
+    ContactsOutlined,
+    DownOutlined,
+    GlobalOutlined,
+    GoldOutlined,
+    HomeOutlined,
+    MenuFoldOutlined,
+    MenuOutlined,
+    MoneyCollectOutlined,
+    PayCircleOutlined,
+    ShopOutlined,
+    ShoppingOutlined,
+    TeamOutlined,
+    UserOutlined,
+} from '@ant-design/icons/lib/icons';
 import { HeartOutlined } from '@ant-design/icons/lib/icons';
 import {
     faCircleQuestion,
@@ -26,6 +44,7 @@ import Menu from '~/component/Popper/Menu';
 
 import { Wrapper as PopperWrapper } from '~/component/Popper';
 import CardHorizontal from '~/component/CardHorizontal';
+import SmallNotification from '~/component/SmallNotification/SmallNotification';
 
 const cx = classNames.bind(styles);
 
@@ -62,6 +81,8 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
+    const [isActive, setIsActive] = useState(false);
+
     const currentUser = true;
 
     const userMenu = [
@@ -129,20 +150,31 @@ function Header() {
         }
     };
 
+    const handleButtonClick = () => {
+        setIsActive(!isActive);
+    };
+
+    const HandleCloseClick = () => {
+        setIsActive(!isActive);
+    };
+
     return (
         <header className={cx('wrapper')}>
             <div className="container">
                 <div className={cx('inner')}>
                     {/* logo */}
                     <Link to={config.routes.home} className={cx('logo')}>
-                        <img src={images.logo} alt="tiktok" />
+                        {/* <img src={images.logo} alt="tiktok" /> */}
+                        <span>
+                            ONLY<span>ME</span>
+                        </span>
                     </Link>
 
                     {/* Some page */}
 
                     {/* Search */}
-                    <div className="search">
-                        <Search />
+                    <div className={cx('search')}>
+                        <Search className={cx('search-input')} />
                     </div>
 
                     {/* Action */}
@@ -173,10 +205,10 @@ function Header() {
                                 </div>
                             )}
                         >
-                            <div className={cx('cart')}>
+                            <Link to={config.routes.cart} className={cx('cart')}>
                                 <ShoppingCartOutlined className={cx('cart-icon')} value={'99+'} />
                                 {/* <div className={cx('cart-qty')}>12</div> */}
-                            </div>
+                            </Link>
                         </Tippy>
 
                         {/* Notify */}
@@ -216,10 +248,10 @@ function Header() {
                         <Menu items={userMenu} onChange={handlerMenuChange}>
                             {currentUser ? (
                                 <Image
-                                    src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/4004db3287a0f283a9a69bfcdbd9b3d1~c5_100x100.jpeg?x-expires=1682298000&x-signature=%2Br1h2i4RNRtVPFhz2tPI6GGNZC4%3D"
+                                    src={require('~/public/uploads/users/user-img.jpg')}
                                     className={cx('user-avatar')}
                                     alt="Nguyen Van A"
-                                    fallback="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
+                                    fallback=""
                                 />
                             ) : (
                                 <button className={cx('more-btn')}>
@@ -227,6 +259,103 @@ function Header() {
                                 </button>
                             )}
                         </Menu>
+                    </div>
+
+                    <div className={cx('mobile')}>
+                        <div>
+                            <MenuOutlined onClick={handleButtonClick} className={cx('menu-icon')} />
+                        </div>
+                        <div className={cx('menu-mobile', isActive ? 'active' : '')}>
+                            <div className={cx('menu-close')}>
+                                <CloseOutlined onClick={HandleCloseClick} />
+                            </div>
+                            {/* info user */}
+                            <div className={cx('user-info')}>
+                                {/* background */}
+                                <div className={cx('user-background')}></div>
+
+                                {/* img user */}
+                                <div className={cx('user-img')}>
+                                    <img src={require('~/public/uploads/users/user-img.jpg')} />
+                                </div>
+
+                                <div className={cx('user-name')}>
+                                    <span>Nguyễn Hoàng Trung</span>
+                                </div>
+                            </div>
+                            {/* user-action */}
+                            <div className={cx('user-menu')}>
+                                <div className={cx('user-menu-item')}>
+                                    <GlobalOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>VIE</span>
+                                        <DownOutlined className={cx('icon-dropdown')} />
+                                    </div>
+                                </div>
+
+                                <div className={cx('user-menu-item')}>
+                                    <PayCircleOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>USA</span>
+                                        <DownOutlined className={cx('icon-dropdown')} />
+                                    </div>
+                                </div>
+
+                                <div className={cx('user-menu-item')}>
+                                    <UserOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>MY ACCOUNT</span>
+                                        {/* <DownOutlined className={cx('icon-dropdown')} /> */}
+                                    </div>
+                                </div>
+
+                                <div className={cx('user-menu-item')}>
+                                    <BellOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>NOTIFICATION</span>
+                                        {/* <DownOutlined className={cx('icon-dropdown')} /> */}
+                                    </div>
+                                </div>
+                                <div className={cx('user-menu-item')}>
+                                    <HeartOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>WISH LIST</span>
+                                        {/* <DownOutlined className={cx('icon-dropdown')} /> */}
+                                    </div>
+                                </div>
+                                <div className={cx('user-menu-item')}>
+                                    <ShoppingOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>YOUR CART</span>
+                                        {/* <DownOutlined className={cx('icon-dropdown')} /> */}
+                                    </div>
+                                </div>
+
+                                <div className={cx('user-menu-item')}>
+                                    <HomeOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>HOME</span>
+                                        {/* <DownOutlined className={cx('icon-dropdown')} /> */}
+                                    </div>
+                                </div>
+                                <div className={cx('user-menu-item')}>
+                                    <TeamOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>ABOUT US</span>
+                                        {/* <DownOutlined className={cx('icon-dropdown')} /> */}
+                                    </div>
+                                </div>
+                                <div className={cx('user-menu-item')}>
+                                    <ContactsOutlined />
+                                    <div className={cx('item-content')}>
+                                        <span>CONTACT</span>
+                                        {/* <DownOutlined className={cx('icon-dropdown')} /> */}
+                                    </div>
+                                </div>
+
+                                <Menu items={userMenu} onChange={handlerMenuChange}></Menu>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

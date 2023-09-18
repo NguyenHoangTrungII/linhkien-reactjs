@@ -1,6 +1,12 @@
 .search,
 .search-result {
-    width: 361px;
+    max-width: 80%;
+
+}
+
+.search-result {
+    width: 835px;
+
 }
 
 .search {
@@ -49,9 +55,8 @@
         border: 1.5px solid rgba(22, 24, 35, .2);
     }
 }
-.search-result{
 
-}
+
 
 .search-title{
     font-size: 1.4rem;
