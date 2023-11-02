@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -59,8 +60,8 @@ function Cart() {
     //     setShowResult(false);
     // };
 
-    console.log('searchResult', searchResult.length > 0);
-    console.log('showResult', showResult);
+    // console.log('searchResult', searchResult.length > 0);
+    // console.log('showResult', showResult);
 
     return (
         //ignore Teddy warning

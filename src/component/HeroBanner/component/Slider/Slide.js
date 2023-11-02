@@ -8,11 +8,10 @@ import './slider.css';
 
 const cx = classNames.bind(styles);
 
-function Slider() {
+function Slide() {
     const [index, setIndex] = useState(0);
 
     const handleSelect = (selectedIndex, e) => {
-        console.log('selected index: ', selectedIndex);
         setIndex(selectedIndex);
     };
 
@@ -53,4 +52,4 @@ function Slider() {
     );
 }
 
-export default Slider;
+export default Slide;

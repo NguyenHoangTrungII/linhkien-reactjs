@@ -5,13 +5,18 @@ import styles from './OurProduct.module.scss';
 import SmallNotification from '~/component/SmallNotification';
 import Separator from '~/component/Separator';
 import Button from '~/component/Button';
+import useCart from '~/hooks/useCart';
 
 const cx = classNames.bind(styles);
 
-function OurProduct() {
+function OurProduct({ OurProduct }) {
+    const { addToCart, isItemOnCart } = useCart();
+
     const sliderSettings = {
         arrows: true,
     };
+
+    console.log('our product', OurProduct);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -28,7 +33,7 @@ function OurProduct() {
                 {/* product */}
                 <div className={cx('category-list')}>
                     {/* <Slider /> */}
-                    <Slider arrowVisible={true} rowNumber={2} />
+                    <Slider arrowVisible={true} rowNumber={2} products={OurProduct} addToCart={addToCart} />
                     {/* <Slider /> */}
                 </div>
 

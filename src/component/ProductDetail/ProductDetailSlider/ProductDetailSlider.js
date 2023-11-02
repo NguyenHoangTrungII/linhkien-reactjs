@@ -4,147 +4,121 @@ import Slider from 'react-slick';
 import classNames from 'classnames/bind';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { HeartFilled, HeartOutlined, StarOutlined } from '@ant-design/icons';
+import QtyButton from '~/component/QtyButton/QtyButton';
+import Button from '~/component/Button';
+import formatCurrency from '~/helpers/currencyFormatter';
+import Separator from '~/component/Separator';
 
 const cx = classNames.bind(styles);
 
-const ProductDetailSlider = () => {
-    const images = [
-        require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
-        // require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
-        require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_F4-3000C16D-32GTZR.jpg'),
-        require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
-        require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
-        require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
+const ProductDetailSlider = ({ productdetail }) => {
+    const [indexThumbnail, setIndexThumbnail] = useState(0);
 
-        // ... Các ảnh khác
-    ];
+    // const images = [
+    //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
+    //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_F4-3000C16D-32GTZR.jpg'),
+    //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
+    //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
+    // ];
 
-    const [nav1, setNav1] = useState(null);
-    const [nav2, setNav2] = useState(null);
+    console.log('product slider nè', productdetail);
 
-    const slider1Ref = useRef(null);
-    const slider2Ref = useRef(null);
-
-    useEffect(() => {
-        setNav1(slider1Ref.current);
-        setNav2(slider2Ref.current);
-    }, []);
-
-    const settings1 = {
-        asNavFor: nav2,
-        ref: slider1Ref,
-    };
-
-    const settings2 = {
-        asNavFor: nav1,
-        ref: slider2Ref,
-        slidesToShow: 4,
-        swipeToSlide: true,
-        focusOnSelect: true,
+    const handleOnClickImg = (index) => {
+        setIndexThumbnail(index);
     };
 
     return (
-        <div className="containe">
-            <div className="row mt-4 d-flex flex-row">
-                <div className="col-5 d-flex">
-                    <Slider {...settings1} className={cx('thumbail-imgs')}>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg')}
-                                alt="a"
-                                className={cx('thumbail-img')}
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_F4-3000C16D-32GTZR-2.jpg')}
-                                alt="a"
-                                className={cx('thumbail-img')}
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_F4-3000C16D-32GTZR-3.jpg')}
-                                alt="a"
-                                className={cx('thumbail-img')}
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_Gskill_Trident_Z_1_1.jpg')}
-                                alt="a"
-                                className={cx('thumbail-img')}
-                            />
-                        </div>
-                        {/* <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_Gskill_Trident_Z_2_1.jpg')}
-                                alt="a"
-                                className={cx('thumbail-img')}
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_ram-desktop-g.skill-32gb-ddr4-bus-2400mhz-f4-2400c15d-32gfxr-109328.jpg')}
-                                alt="a"
-                                className={cx('thumbail-img')}
-                            />
-                        </div> */}
-                    </Slider>
+        <div className={cx('wrapper')}>
+            <div className={cx('row')}>
+                <div className={cx('col-2')}>
+                    <div className={cx('gallery')}>
+                        {productdetail.images.slice(0, 4).map((item, index) => {
+                            return (
+                                <div className={cx('gallery-imgs')} key={index} onClick={() => handleOnClickImg(index)}>
+                                    <img className={cx('gallery-img')} src={item.url} alt="abc" />
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
-                <div className="col-2  d-flex flex-column ">
-                    <Slider {...settings2} className={cx('gallery-imgs')} vertical={true}>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg')}
-                                alt="a"
-                                className={cx('gallery-img')}
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_F4-3000C16D-32GTZR-2.jpg')}
-                                alt="a"
-                                className={cx('gallery-img')}
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_F4-3000C16D-32GTZR-3.jpg')}
-                                alt="a"
-                                className={cx('gallery-img')}
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_Gskill_Trident_Z_1_1.jpg')}
-                                alt="a"
-                                className={cx('gallery-img')}
-                            />
-                        </div>
-                        {/* <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_Gskill_Trident_Z_2_1.jpg')}
-                                alt="a"
-                                className={cx('gallery-img')}
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={require('~/public/uploads/products/RAM/Gallery/Product_Gallery_570x470_ram-desktop-g.skill-32gb-ddr4-bus-2400mhz-f4-2400c15d-32gfxr-109328.jpg')}
-                                alt="a"
-                                className={cx('gallery-img')}
-                            />
-                        </div> */}
-                    </Slider>
+                <div className={cx('col-5')}>
+                    <div className={cx('thumbnail')}>
+                        <img
+                            className={cx('thumbnail-img')}
+                            src={productdetail.images[indexThumbnail].url}
+                            alt={productdetail.name}
+                        />
+                    </div>
                 </div>
-                <div className="col-5">
+                <div className={cx('col-5', 'content-wrapper')}>
                     <div className={cx('content-inner')}>
-                        <div>
-                            <h3>Havic HV G-92 Gamepad</h3>
-                            <div>{/* rating */}</div>
+                        <div className={cx('product-info')}>
+                            <h3 className={cx('product-name')}>{productdetail.name} </h3>
+                            <div className={cx('rating')}>
+                                <div className={cx('star')}>
+                                    <StarOutlined />
+                                    <StarOutlined />
+                                    <StarOutlined />
+                                    <StarOutlined />
+                                    <StarOutlined />
+                                </div>
+                                <span>{'(150 review)'}</span>
+                                <div className={cx('line')} />
+                                <span className={cx('status')}>In stock</span>
+                            </div>
+                            <span className={cx('product-price')}>{formatCurrency(productdetail.price)}</span>
+                            <p className={cx('product-des')}>{productdetail.description}</p>
                         </div>
-                        <div> </div>
+
+                        {/* Separator */}
+                        <Separator className={cx('separator')} />
+
+                        {/* share */}
+                        <div className={cx('share-with')}>
+                            <h3>Share</h3>
+                        </div>
+                        {/* action */}
+                        <div className={cx('action')}>
+                            {/* qty button */}
+                            <QtyButton className={cx('qty-button')} />
+                            {/* //     Buy Now */}
+                            <Button primary className={cx('btn-buy-now')}>
+                                Buy now
+                            </Button>
+                            {/* add wish list button */}
+
+                            <div className={cx('add-to-wish')}>
+                                <HeartOutlined className={cx('icon-heart')} />
+                            </div>
+                        </div>
+                        {/* info  */}
+                        <div className={cx('support-infos')}>
+                            <div className={cx('support-info-detail')}>
+                                {/* icon */}
+                                <img src={require('~/public/uploads/icons/icon-delivery.png')} />
+                                {/* content */}
+                                <div className={cx('content')}>
+                                    {/* title */}
+                                    <h2>Free Delivery</h2>
+                                    {/* detail */}
+                                    <p>Enter your postal code for Delivery Availability</p>
+                                </div>
+                            </div>
+
+                            <div className={cx('support-info-detail')}>
+                                {/* icon */}
+                                <img src={require('~/public/uploads/icons/Icon-return.png')} />
+                                {/* content */}
+                                <div className={cx('content')}>
+                                    {/* title */}
+                                    <h2>Return Delivery</h2>
+                                    {/* detail */}
+                                    <p>Free 30 Days Delivery Returns. Details</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div></div>
                     </div>
                 </div>
             </div>

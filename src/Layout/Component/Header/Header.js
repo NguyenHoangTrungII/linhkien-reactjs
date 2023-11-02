@@ -33,6 +33,7 @@ import {
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
+import { useSelector } from 'react-redux';
 
 // import Image from '~/component/image';
 import images from '~/assets/images';
@@ -45,6 +46,7 @@ import Menu from '~/component/Popper/Menu';
 import { Wrapper as PopperWrapper } from '~/component/Popper';
 import CardHorizontal from '~/component/CardHorizontal';
 import SmallNotification from '~/component/SmallNotification/SmallNotification';
+import Cart from './Cart/Cart';
 
 const cx = classNames.bind(styles);
 
@@ -84,6 +86,15 @@ function Header() {
     const [isActive, setIsActive] = useState(false);
 
     const currentUser = true;
+
+    const store = useSelector((state) => ({
+        cart: state.cart,
+        // user: state.auth,
+        // isAuthenticating: state.app.isAuthenticating,
+        // isLoading: state.app.loading,
+    }));
+
+    console.log('data', store);
 
     const userMenu = [
         {
@@ -181,35 +192,10 @@ function Header() {
                     <div className={cx('action')}>
                         {/* Wishlist */}
                         <div className={cx('wishlist')}>
-                            <HeartOutlined className={cx('wishlist-icon')} value={'99+'} />
+                            <HeartOutlined className={cx('wishlist-icon')} value={''} />
                         </div>
                         {/* Cart */}
-                        <Tippy
-                            interactive
-                            placement="top-end"
-                            trigger="mouseenter"
-                            delay={[0, 0]}
-                            render={(attrs) => (
-                                <div className={cx('cart-result')} tabIndex="-1" {...attrs}>
-                                    <PopperWrapper>
-                                        <h4 className={cx('cart-title')}>My cart</h4>
-
-                                        {myCart.slice(0, 5).map((result) => (
-                                            <CardHorizontal key={result._id} data={result} />
-                                        ))}
-
-                                        <h4 className={cx('cart-bottom')}>
-                                            <Link>51 another products</Link>
-                                        </h4>
-                                    </PopperWrapper>
-                                </div>
-                            )}
-                        >
-                            <Link to={config.routes.cart} className={cx('cart')}>
-                                <ShoppingCartOutlined className={cx('cart-icon')} value={'99+'} />
-                                {/* <div className={cx('cart-qty')}>12</div> */}
-                            </Link>
-                        </Tippy>
+                        <Cart data={store.cart} />
 
                         {/* Notify */}
                         <Tippy
@@ -222,9 +208,9 @@ function Header() {
                                     <PopperWrapper>
                                         <h4 className={cx('notify-title')}>notification</h4>
 
-                                        {myCart.slice(0, 5).map((result) => (
+                                        {/* {myCart.slice(0, 5).map((result) => (
                                             <CardHorizontal key={result._id} data={result} />
-                                        ))}
+                                        ))} */}
 
                                         <h4 className={cx('notify-bottom')}>
                                             <Link>More</Link>

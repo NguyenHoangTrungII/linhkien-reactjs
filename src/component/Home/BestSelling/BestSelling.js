@@ -5,13 +5,19 @@ import styles from './BestSelling.js.module.scss';
 import SmallNotification from '~/component/SmallNotification';
 import Separator from '~/component/Separator';
 import Button from '~/component/Button';
+import useCart from '~/hooks/useCart';
 
 const cx = classNames.bind(styles);
 
-function BestSelling() {
+function BestSelling({ BestSellProduct }) {
+    const { addToCart, isItemOnCart } = useCart();
+
     const sliderSettings = {
         arrows: true,
     };
+
+    // console.log(addToCart);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -33,7 +39,7 @@ function BestSelling() {
                 {/* product */}
                 <div className={cx('category-list')}>
                     {/* <Slider /> */}
-                    <Slider arrowVisible={false} />
+                    <Slider arrowVisible={false} products={BestSellProduct} addToCart={addToCart} />
                     {/* <Slider /> */}
                 </div>
 

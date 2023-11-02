@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 // import ExampleCarouselImage from 'components/ExampleCarouselImage';
 
 import styles from './HeroBanner.module.scss';
-import Slider from './component/Slider';
+import Slide from './component/Slider';
 
 const cx = classNames.bind(styles);
 
@@ -67,7 +67,7 @@ function HeroBanner() {
             {/* Hero Banner */}
             <div className={cx('slider-wrapper')}>
                 <div className={cx('slider-inner')}>
-                    <Slider />
+                    <Slide />
                 </div>
             </div>
         </div>

@@ -3,16 +3,17 @@ import SliderProduct from 'react-slick';
 import ProductCard from '../ProductCard';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { RightOutlined, LeftOutlined } from '@ant-design/icons/lib/icons';
+import { RightOutlined } from '@ant-design/icons/lib/icons';
 import classNames from 'classnames/bind';
 import styles from './Slider.module.scss';
 import './Slider.module.scss';
+// import useCart from '~/hooks/useCart';
 
 const cx = classNames.bind(styles);
 
-function Slider({ arrowVisible = true, rowNumber = 1 }) {
+function Slider({ products = [], arrowVisible = true, rowNumber = 1, addToCart }) {
     function PrevArrow(props) {
-        const { className, style, onClick } = props;
+        const { style, onClick } = props;
         return (
             <button
                 className={cx('prevIcon')}
@@ -23,7 +24,7 @@ function Slider({ arrowVisible = true, rowNumber = 1 }) {
     }
 
     function NextArrow(props) {
-        const { className, style, onClick } = props;
+        const { onClick } = props;
         return (
             <div className={cx('wrapper-nextarrow', props)}>
                 <RightOutlined className={cx('nextArrow')} onClick={onClick} />
@@ -65,29 +66,18 @@ function Slider({ arrowVisible = true, rowNumber = 1 }) {
                 },
             },
         ],
-        PrevArrow: <PrevArrow />,
+        prevArrow: <PrevArrow />,
         nextArrow: <NextArrow />,
     };
+
+    // console.log('Slider', products);
 
     return (
         <div className="container">
             <SliderProduct {...settings}>
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                {products.map((product, index) => {
+                    return <ProductCard key={index} product={product} addToCart={addToCart} />;
+                })}
             </SliderProduct>
         </div>
     );

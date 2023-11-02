@@ -11,6 +11,7 @@ import LogIn from '~/pages/LogIn/LogIn';
 import ProductDetail from '~/pages/ProductDetail';
 import SignUp from '~/pages/SignUp/SignUp';
 import WishList from '~/pages/WishList/WishList';
+import ProductList from '~/pages/ProductList';
 
 const publicRouters = [
     { path: config.routes.home, component: Home },
@@ -22,6 +23,7 @@ const publicRouters = [
     { path: config.routes.login, component: LogIn, layout: 'login' },
     { path: config.routes.signup, component: SignUp, layout: 'login' },
     { path: config.routes.accountdetail, component: AccountDetail },
+    { path: config.routes.productlist, component: ProductList },
 ];
 
 const privateRoutes = [];

@@ -3,6 +3,10 @@ import styles from './CartCheckOut.module.scss';
 import InputText from '~/component/Input';
 import RadioText from '~/component/RadioText/RadioText';
 import Button from '~/component/Button/Button';
+import Separator from '~/component/Separator';
+import formatCurrency from '~/helpers/currencyFormatter';
+
+import { Radio } from 'antd';
 
 const cx = classNames.bind(styles);
 
@@ -40,7 +44,7 @@ function CartCheckOut({ className }) {
                                 <img src={product.img} alt="product" className={cx('img-product')} />
                                 <span>{product.name}</span>
                             </div>
-                            <span>{product.price}</span>
+                            <span>{formatCurrency(product.price)}</span>
                         </div>
                     );
                 })}
@@ -50,17 +54,21 @@ function CartCheckOut({ className }) {
             <div>
                 <div className={cx('payment')}>
                     <span className={cx('text')}>Subtotal:</span>
-                    <span className={cx('price')}>{200000}</span>
+                    <span className={cx('price')}>{formatCurrency(200000)}</span>
                 </div>
+
+                <Separator className={cx('checkout-speprator')} />
 
                 <div className={cx('payment')}>
                     <span className={cx('text')}>Ship:</span>
-                    <span className={cx('price')}>{200000}</span>
+                    <span className={cx('price')}>{formatCurrency(200000)}</span>
                 </div>
+
+                <Separator className={cx('checkout-speprator')} />
 
                 <div className={cx('payment')}>
                     <span className={cx('text')}>Total:</span>
-                    <span className={cx('price')}>{200000}</span>
+                    <span className={cx('price')}>{formatCurrency(200000)}</span>
                 </div>
             </div>
 

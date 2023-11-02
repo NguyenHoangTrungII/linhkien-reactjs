@@ -9,6 +9,10 @@
     align-items: center;
 }
 
+.wrapper.active{
+    border: 3px solid rgba(249, 91, 43, 1);
+}
+
 .inner{
     display: flex;
     flex-direction: column;

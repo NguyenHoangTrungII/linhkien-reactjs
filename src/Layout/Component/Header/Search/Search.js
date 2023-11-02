@@ -59,8 +59,8 @@ function Search({ className = '' }) {
         setShowResult(false);
     };
 
-    console.log('searchResult', searchResult.length > 0);
-    console.log('showResult', showResult);
+    // console.log('searchResult', searchResult.length > 0);
+    // console.log('showResult', showResult);
 
     return (
         //ignore Teddy warning

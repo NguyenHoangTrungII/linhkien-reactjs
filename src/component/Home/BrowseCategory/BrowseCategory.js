@@ -35,6 +35,12 @@ for (let i = 0; i < categories.length; i += chunkSize) {
 }
 
 function BrowseCategory() {
+    const [activeCategory, setActiveCategory] = useState(null);
+
+    const handleCategoryClick = (categoryId) => {
+        setActiveCategory(categoryId);
+    };
+
     function PrevArrow(props) {
         const { className, style, onClick } = props;
         return (
@@ -109,7 +115,12 @@ function BrowseCategory() {
                     <div className="container">
                         <Slider {...settings}>
                             {categories.map((item, index) => (
-                                <CategoryCard data={item} />
+                                <CategoryCard
+                                    data={item}
+                                    key={index}
+                                    isActive={activeCategory === item._id}
+                                    onClick={handleCategoryClick}
+                                />
                             ))}
                         </Slider>
                     </div>

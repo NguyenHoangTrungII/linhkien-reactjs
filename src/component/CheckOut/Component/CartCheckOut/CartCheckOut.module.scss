@@ -61,8 +61,12 @@
 
 }
 
-.payment:not(:last-child){
-    border-bottom: 3px solid rgba(35, 34, 34, 0.09);
+// .payment:not(:last-child){
+//     border-bottom: 3px solid rgba(35, 34, 34, 0.09);
+// }
+
+.checkout-speprator{
+  margin-bottom: 20px;
 }
 
 .text{}
