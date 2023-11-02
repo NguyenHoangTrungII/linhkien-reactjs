@@ -1,17 +1,33 @@
-
+.productlist-container{
+    height: 700px;
+}
 .filter-by-brand{
 }
 
 .title-brand{
-    
+
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.filter-brand-separator{
+    margin-bottom: 10px;
 }
 
 .name-brands{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    // height: 100px;
 }
 
 .name-brand{
+    display: flex;
+    align-items: center;
+}
 
+.checkbox-brand{
+    .ant-checkbox-inner {
+        width: 16px;
+        height: 16px;
+    }
 }

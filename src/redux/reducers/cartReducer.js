@@ -19,7 +19,7 @@ export const cartReducer = (state = [], action) => {
             return [];
         case ADD_QTY_ITEM:
             return state.map((product) => {
-                if (product.id === action.payload) {
+                if (product._id === action.payload) {
                     return {
                         ...product,
                         quantity: product.quantity + 1,
@@ -29,7 +29,7 @@ export const cartReducer = (state = [], action) => {
             });
         case MINUS_QTY_ITEM:
             return state.map((product) => {
-                if (product.id === action.payload) {
+                if (product._id === action.payload) {
                     return {
                         ...product,
                         quantity: product.quantity - 1,

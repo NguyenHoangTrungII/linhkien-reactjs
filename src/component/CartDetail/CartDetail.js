@@ -13,6 +13,9 @@ import formatCurrency from '~/helpers/currencyFormatter';
 import { InputNumber } from 'antd';
 import { Value } from 'sass';
 import { calculateTotal } from '~/helpers/totalCaculate';
+import useCart from '~/hooks/useCart';
+import { addQtyItem, minusQtyItem } from '~/redux/actions/cartAction';
+import QtyButton from '../QtyButton/QtyButton';
 
 // import { Table } from 'antd';
 
@@ -23,12 +26,13 @@ function CartDetail() {
         cart: state.cart,
     }));
 
+    const { addToCart, isItemOnCart } = useCart();
+
     const [qty, setQty] = useState(store.cart.map(() => 1));
     const history = useNavigate();
 
     const onClickItem = (id) => {
         history(`/ProductDetail/${id}`);
-        console.log('clicked nè');
     };
 
     useEffect(() => {
@@ -41,12 +45,13 @@ function CartDetail() {
         setQty(newQty);
     };
 
-    const totalSubTotal = (index, price) => {
-        return formatCurrency(parseFloat(qty[index]) * parseFloat(price));
+    const totalSubTotal = (qty, price) => {
+        return formatCurrency(parseFloat(qty) * parseFloat(price));
     };
 
     const columns = ['Product', 'Price', 'Quantity', 'Subtotal'];
 
+    console.log(store.cart);
     return (
         <div className={cx('row', 'cart-container')}>
             <div className={cx('col-12', 'productdetail-wrapper')}>
@@ -75,16 +80,24 @@ function CartDetail() {
                                             <span>{formatCurrency(item.price)}</span>
                                         </td>
                                         <td>
-                                            <InputNumber
+                                            {/* <InputNumber
                                                 size={'middle'}
                                                 className={cx('input-number')}
                                                 min={0}
                                                 defaultValue={qty[index]}
                                                 onStep={(value) => handleUpdateQTY(value, index)}
                                                 style={{ textAlign: 'center' }}
+                                            /> */}
+
+                                            <QtyButton
+                                                className={cx('qty-button-cart')}
+                                                inputStyle={cx('qty-button-cart')}
+                                                product={item}
+                                                onAddqty={addQtyItem}
+                                                onMinsqty={minusQtyItem}
                                             />
                                         </td>
-                                        <td>{totalSubTotal(index, item.price)}</td>
+                                        <td>{totalSubTotal(item.quantity, item.price)}</td>
                                     </tr>
                                 ))}
                             </>
@@ -116,18 +129,26 @@ function CartDetail() {
                             <div className={cx('payment')}>
                                 <span className={cx('text')}>Subtotal:</span>
                                 <span className={cx('price')}>
-                                    {calculateTotal(store.cart.map((item) => item.price * item.quantity))}
+                                    {formatCurrency(
+                                        calculateTotal(store.cart.map((item) => item.price * item.quantity)),
+                                    )}
                                 </span>
                             </div>
 
                             <div className={cx('payment')}>
                                 <span className={cx('text')}>Ship:</span>
-                                <span className={cx('price')}>{200000}</span>
+                                <span className={cx('price')}>{formatCurrency(200000)}</span>
                             </div>
 
                             <div className={cx('payment')}>
                                 <span className={cx('text')}>Total:</span>
-                                <span className={cx('price')}>{200000}</span>
+                                <span className={cx('price')}>
+                                    {formatCurrency(
+                                        parseFloat(
+                                            calculateTotal(store.cart.map((item) => item.price * item.quantity)),
+                                        ) + +200000,
+                                    )}
+                                </span>
                             </div>
                         </div>
 
