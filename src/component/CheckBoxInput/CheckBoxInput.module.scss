@@ -113,7 +113,7 @@
   left: 0;
   height: 22px;
   width: 22px;
-  background-color: #eee;
+  background-color: var(--white);
   border-radius: 4px;
   
   border: 1px solid var(--primary);
@@ -124,7 +124,7 @@
 
 .container:hover {
   .input-checkbox ~ .checkmark {
-    background-color: #ccc;
+    background-color: var(--white);
   }
 }
 

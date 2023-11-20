@@ -1,11 +1,40 @@
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import classNames from 'classnames/bind';
 import styles from './LogIn.module.scss';
 import InputText from '../Input/Input';
 import Button from '../Button/Button';
+import { Login } from '~/redux/actions/authAction';
 
 const cx = classNames.bind(styles);
 
 function LogInComp() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+        console.log(email);
+    };
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
+
+    const handleSubmit = async () => {
+        try {
+            console.log(email, password);
+            await dispatch(Login(email, password));
+            navigate('/');
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         // <div className="container-fluid	">
         <div className={cx('wrapper')}>
@@ -19,12 +48,24 @@ function LogInComp() {
                     <span className={cx('login-subtitle')}>Enter your details below</span>
 
                     <div className={cx('login-input')}>
-                        <InputText lineunder className={cx('email')} placeholder={'Email or Phone Number'} />
-                        <InputText lineunder className={cx('password')} placeholder={'Password'} />
+                        <InputText
+                            lineunder
+                            className={cx('email')}
+                            placeholder={'Email or Phone Number'}
+                            value={email}
+                            setValue={handleEmailChange}
+                        />
+                        <InputText
+                            lineunder
+                            className={cx('password')}
+                            placeholder={'Password'}
+                            value={password}
+                            setValue={handlePasswordChange}
+                        />
                     </div>
 
                     <div className={cx('login-footer')}>
-                        <Button primary className={cx('btn-login')}>
+                        <Button primary className={cx('btn-login')} onClick={handleSubmit}>
                             Log in
                         </Button>
                         <Button text className={cx('btn-forgot')}>

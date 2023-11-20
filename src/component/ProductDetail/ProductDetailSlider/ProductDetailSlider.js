@@ -22,8 +22,6 @@ const ProductDetailSlider = ({ productdetail }) => {
     //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
     // ];
 
-    console.log('product slider nè', productdetail);
-
     const handleOnClickImg = (index) => {
         setIndexThumbnail(index);
     };
@@ -81,7 +79,7 @@ const ProductDetailSlider = ({ productdetail }) => {
                         {/* action */}
                         <div className={cx('action')}>
                             {/* qty button */}
-                            <QtyButton className={cx('qty-button')} />
+                            <QtyButton className={cx('qty-button')} isQuantity={true} />
                             {/* //     Buy Now */}
                             <Button primary className={cx('btn-buy-now')}>
                                 Buy now

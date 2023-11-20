@@ -31,27 +31,7 @@ function ProductCard({ product, addToCart }) {
         setCartAction(!cartAction);
     }, [addToCart, product]);
 
-    // const handleAddToCard =
-    //     (() => {
-    //         addToCart({ ...product });
-    //         setCartAction(!cartAction);
-    //     },
-    //     [addToCart, product]);
-    // const handleAddToCard = () => {
-    //
-    // };
-
-    // console.log('re-render productcard');
-
-    // console.log('our product', product);
-    // console.log(
-    //     'our product img',
-    //     product.images.filter((image) => image.isThumbnail === true),
-    // );
-
     const image = product.images.filter((image) => image.isThumbnail === true);
-
-    // console.log('our product img url', image[0]);
 
     return (
         <div className={cx('wrapper')}>

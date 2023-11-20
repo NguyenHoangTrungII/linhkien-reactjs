@@ -9,19 +9,21 @@ import { useDispatch } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
-function QtyButton({ className, inputStyle = '', onAddqty, onMinsqty, product }) {
-    const [qty, setqty] = useState(1);
+function QtyButton({ className, inputStyle = '', updateQuantity, product, isQuantity = false }) {
+    const [qty, setqty] = useState(isQuantity ? 1 : product.quantity);
     const dispatch = useDispatch();
 
     const handleAddQty = () => {
-        setqty(qty + 1);
-        dispatch(onAddqty(product._id));
+        const updatedQty = qty + 1;
+
+        setqty((prevQty) => prevQty + 1);
+        dispatch(updateQuantity(product._id, updatedQty, qty));
     };
 
     const handleMinsQty = () => {
         if (qty >= 2) {
             setqty(qty - 1);
-            dispatch(onMinsqty(product._id));
+            dispatch(updateQuantity(product._id, qty, qty - 1));
         }
     };
 

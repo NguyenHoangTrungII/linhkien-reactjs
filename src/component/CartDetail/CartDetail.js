@@ -8,13 +8,14 @@ import Table from './Component/Table';
 import Button from '../Button/Button';
 import InputText from '../Input/Input';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import formatCurrency from '~/helpers/currencyFormatter';
 import { InputNumber } from 'antd';
 import { Value } from 'sass';
 import { calculateTotal } from '~/helpers/totalCaculate';
 import useCart from '~/hooks/useCart';
-import { addQtyItem, minusQtyItem } from '~/redux/actions/cartAction';
+import { addQtyItem, fetchCart, minusQtyItem, updateQuantity } from '~/redux/actions/cartAction';
 import QtyButton from '../QtyButton/QtyButton';
 
 // import { Table } from 'antd';
@@ -22,13 +23,15 @@ import QtyButton from '../QtyButton/QtyButton';
 const cx = classNames.bind(styles);
 
 function CartDetail() {
-    const store = useSelector((state) => ({
-        cart: state.cart,
-    }));
+    const dispatch = useDispatch();
+    const cart = useSelector((state) => state.cart);
+    const isLoading = useSelector((state) => state.cart.isLoading);
+    const [refresh, setRefresh] = useState(false);
 
-    const { addToCart, isItemOnCart } = useCart();
+    // console.log(cart);
+    // const { addToCart, isItemOnCart } = useCart();
 
-    const [qty, setQty] = useState(store.cart.map(() => 1));
+    // const [qty, setQty] = useState(cart.map(() => 1));
     const history = useNavigate();
 
     const onClickItem = (id) => {
@@ -36,14 +39,36 @@ function CartDetail() {
     };
 
     useEffect(() => {
-        window.scrollTo(0, 0); // Cuộn đến đầu trang khi component mount
-    }, []);
+        if (!isLoading) {
+            const fetching = async () => {
+                try {
+                    await dispatch(fetchCart());
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+            fetching();
+            console.log(isLoading);
+        }
+    }, [dispatch]);
 
-    const handleUpdateQTY = (value, index) => {
-        const newQty = [...qty];
-        newQty[index] = value;
-        setQty(newQty);
+    const handlePageRefresh = () => {
+        setRefresh((prevRefresh) => !prevRefresh);
     };
+
+    window.onload = handlePageRefresh;
+
+    // useEffect(() => {
+    // c
+    // }, []);
+
+    console.log('ccccccccccccccc', cart.cartItems);
+
+    // const handleUpdateQTY = (value, index) => {
+    //     const newQty = [...qty];
+    //     newQty[index] = value;
+    //     setQty(newQty);
+    // };
 
     const totalSubTotal = (qty, price) => {
         return formatCurrency(parseFloat(qty) * parseFloat(price));
@@ -51,7 +76,7 @@ function CartDetail() {
 
     const columns = ['Product', 'Price', 'Quantity', 'Subtotal'];
 
-    console.log(store.cart);
+    // console.log(cart[0]);
     return (
         <div className={cx('row', 'cart-container')}>
             <div className={cx('col-12', 'productdetail-wrapper')}>
@@ -64,14 +89,18 @@ function CartDetail() {
                         </tr>
                     </thead>
                     <tbody>
-                        {store.cart.length > 0 ? (
+                        {cart.cartItems.length > 0 ? (
                             <>
-                                {store.cart.map((item, index) => (
+                                {cart.cartItems.map((item, index) => (
                                     <tr key={index} className={cx('cart-row')}>
                                         <td className={cx('product')} onClick={() => onClickItem(item._id)}>
                                             {}
                                             <img
-                                                src={item.images.filter((image) => image.isThumbnail === true)[0].url}
+                                                src={
+                                                    item.productId.images.filter(
+                                                        (image) => image.isThumbnail === true,
+                                                    )[0].url
+                                                }
                                                 alt={item.name}
                                             />
                                             <p>{item.name}</p>
@@ -93,8 +122,8 @@ function CartDetail() {
                                                 className={cx('qty-button-cart')}
                                                 inputStyle={cx('qty-button-cart')}
                                                 product={item}
-                                                onAddqty={addQtyItem}
-                                                onMinsqty={minusQtyItem}
+                                                updateQuantity={updateQuantity}
+                                                // onMinsqty={updateQuantity}
                                             />
                                         </td>
                                         <td>{totalSubTotal(item.quantity, item.price)}</td>
@@ -130,7 +159,12 @@ function CartDetail() {
                                 <span className={cx('text')}>Subtotal:</span>
                                 <span className={cx('price')}>
                                     {formatCurrency(
-                                        calculateTotal(store.cart.map((item) => item.price * item.quantity)),
+                                        cart.cartItems.length > 0 &&
+                                            calculateTotal(
+                                                cart.cartItems.map(
+                                                    (item) => parseInt(item.price) * parseInt(item.quantity),
+                                                ),
+                                            ),
                                     )}
                                 </span>
                             </div>
@@ -145,7 +179,10 @@ function CartDetail() {
                                 <span className={cx('price')}>
                                     {formatCurrency(
                                         parseFloat(
-                                            calculateTotal(store.cart.map((item) => item.price * item.quantity)),
+                                            cart.cartItems.length > 0 &&
+                                                calculateTotal(
+                                                    cart.cartItems.map((item) => item.price * item.quantity),
+                                                ),
                                         ) + +200000,
                                     )}
                                 </span>

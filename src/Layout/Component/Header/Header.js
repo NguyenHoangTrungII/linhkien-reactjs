@@ -87,14 +87,18 @@ function Header() {
 
     const currentUser = true;
 
-    const store = useSelector((state) => ({
-        cart: state.cart,
-        // user: state.auth,
-        // isAuthenticating: state.app.isAuthenticating,
-        // isLoading: state.app.loading,
-    }));
+    const isUser = JSON.parse(localStorage.getItem('user'));
+    // let cart = useSelector((state) => state.cart);
+    // if (isUser) {
+    //     console.log(cart)
+    //     cart = cart.cartItems.items[0].item;
+    // } else {
+    //     cart = [];
+    // }
 
-    console.log('data', store);
+    // const userInfo = localStorage.getItem('user');
+    // const metghe = JSON.parse(userInfo);
+    // console.log(metghe);
 
     const userMenu = [
         {
@@ -195,7 +199,7 @@ function Header() {
                             <HeartOutlined className={cx('wishlist-icon')} value={''} />
                         </div>
                         {/* Cart */}
-                        <Cart data={store.cart} />
+                        {/* <Cart data={cart} /> */}
 
                         {/* Notify */}
                         <Tippy

@@ -1,5 +1,5 @@
 .productlist-container{
-    height: 700px;
+    height: 1000px;
 }
 .filter-by-brand{
 }
@@ -10,14 +10,16 @@
     font-weight: 600;
 }
 
-.filter-brand-separator{
-    margin-bottom: 10px;
+.filter-separator{
+    margin: 10px 0 28px;
 }
 
 .name-brands{
     display: flex;
     flex-direction: column;
-    // height: 100px;
+    max-height: 160px;
+    overflow-y: auto; 
+
 }
 
 .name-brand{
@@ -31,3 +33,13 @@
         height: 16px;
     }
 }
+
+.filter-by-price{
+    margin-top: 10px;
+}
+
+.slider-price{
+    // ba: var(--primary);
+    font-size: 50px;
+}
+

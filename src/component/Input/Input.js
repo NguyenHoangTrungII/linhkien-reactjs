@@ -20,6 +20,8 @@ function InputText({
     className,
     Lefticon,
     Righticon,
+    value = '',
+    setValue = '',
     ...passProps
 }) {
     let Comp = 'input';
@@ -48,7 +50,7 @@ function InputText({
         large,
     });
 
-    return <Comp className={classes} {...props} placeholder={placeholder} />;
+    return <Comp className={classes} {...props} placeholder={placeholder} value={value} onChange={setValue} />;
 }
 
 InputText.propTypes = {

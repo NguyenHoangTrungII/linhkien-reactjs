@@ -11,12 +11,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { cartReducer } from './redux/reducers/cartReducer';
+import { productReducer } from './redux/reducers/productReducer';
+import { authReducer } from './redux/reducers/authReducer';
 
 //redux
 const rootReducer = combineReducers({
-    // store: c,
+    store: productReducer,
     cart: cartReducer,
-    // auth: authReducer,
+    auth: authReducer,
     form: formReducer,
 });
 
