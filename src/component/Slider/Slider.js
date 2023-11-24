@@ -11,7 +11,7 @@ import './Slider.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Slider({ products = [], arrowVisible = true, rowNumber = 1, addToCart }) {
+function Slider({ products = [], arrowVisible = true, rowNumber = 1, slidesToShow = 4, addToCart }) {
     function PrevArrow(props) {
         const { style, onClick } = props;
         return (
@@ -38,13 +38,13 @@ function Slider({ products = [], arrowVisible = true, rowNumber = 1, addToCart }
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: slidesToShow,
         slidesToScroll: 1,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: slidesToShow - 1,
                     slidesToScroll: 3,
                     infinite: true,
                     dots: true,
@@ -53,7 +53,7 @@ function Slider({ products = [], arrowVisible = true, rowNumber = 1, addToCart }
             {
                 breakpoint: 600,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: slidesToShow - 2,
                     slidesToScroll: 2,
                     initialSlide: 2,
                 },

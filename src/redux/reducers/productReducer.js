@@ -6,6 +6,7 @@ import {
     FETCH_CATEGORYLIST,
     FETCH_PRODUCTBYNAME,
     FETCH_PRODUCTSBYID,
+    FETCH_PRODUCTFILTER,
 } from '../actions/productAction';
 
 const initialState = {
@@ -14,8 +15,10 @@ const initialState = {
     categorieslist: [],
     productsbyname: [],
     productsbyID: [],
+    productFilter: [],
     isFirstOpen: false,
     isLoading: false,
+    isLoadingSearch: false,
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -25,7 +28,6 @@ export const productReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: true,
             };
-
         case PRODUCT_FAILURE:
             return {
                 ...state,
@@ -51,6 +53,13 @@ export const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productsbyname: [...action.productsbyname],
+                isLoading: false,
+            };
+        }
+        case FETCH_PRODUCTFILTER: {
+            return {
+                ...state,
+                productFilter: [...action.productFilter],
                 isLoading: false,
             };
         }

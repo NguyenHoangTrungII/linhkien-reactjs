@@ -93,6 +93,8 @@ export const addToCart = (itemId) => {
             type: CART_LOADING,
         });
         const user = getState().auth.user;
+
+        console.log('user-addtocart from cartaction', user);
         try {
             const response = await timeoutPromise(
                 fetch(`${API_URL}/cart/${itemId}`, {
@@ -164,6 +166,7 @@ export const updateQuantity = (itemId, qty, oldqty) => {
     return async (dispatch, getState) => {
         dispatch({
             type: CART_LOADING,
+            //set true
         });
         const user = getState().auth.user;
         try {
@@ -190,7 +193,6 @@ export const updateQuantity = (itemId, qty, oldqty) => {
             if (oldqty - qty === 1) {
                 dispatch({
                     type: 'ADD_QTY_ITEM',
-
                     cartItemId: itemId,
                 });
             } else {

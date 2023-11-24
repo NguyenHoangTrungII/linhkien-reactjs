@@ -8,6 +8,7 @@ import {
     AUTH_FAILURE,
     FORGET_PASSWORD,
     RESET_PASSWORD,
+    UPLOAD_IMAGE,
 } from '../actions/authAction';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 // import UserMessages from '../../messages/user';
@@ -89,13 +90,13 @@ export const authReducer = (state = initialState, action) => {
                 },
                 isLoading: false,
             };
-        case UPLOAD_PROFILEPIC:
-            state.user.profilePicture = action.profilePic;
+        case UPLOAD_IMAGE:
+            // state.user.profilePicture = action.profilePic;
             return {
-                ...state,
-                user: {
-                    ...state.user,
-                },
+                // ...state,
+                // user: {
+                //     ...state.user,
+                // },
                 isLoading: false,
             };
         default:

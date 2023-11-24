@@ -6,6 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const cx = classNames.bind(styles);
 
 function CheckBoxInput({ text = '', textStyle = [] }) {
+    // const checkbox = document.getElementById('checkboxbrand');
+    const handleOnchange = () => {
+        // const currentURL = window.location.href;
+        // if (checkbox.checked) {
+        //     currentURL.href = '/new-path';
+        // } else {
+        //     currentURL.href = '#';
+        // }
+    };
     return (
         // <div className={cx('checkbox-container')}>
         //     <input type="checkbox" className={cx('checkbox-input')} />
@@ -16,7 +25,7 @@ function CheckBoxInput({ text = '', textStyle = [] }) {
 
         <label className={cx('container')}>
             <label>{text}</label>
-            <input type="checkbox" className={cx('input-checkbox')} />
+            <input type="checkbox" className={cx('input-checkbox')} onChange={handleOnchange} id="checkboxbrand" />
             <span className={cx('checkmark')}></span>
         </label>
     );

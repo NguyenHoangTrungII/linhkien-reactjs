@@ -13,12 +13,16 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { cartReducer } from './redux/reducers/cartReducer';
 import { productReducer } from './redux/reducers/productReducer';
 import { authReducer } from './redux/reducers/authReducer';
+import { categoryReducer } from './redux/reducers/categoryReducer';
+import { brandReducer } from './redux/reducers/brandReducer';
 
 //redux
 const rootReducer = combineReducers({
     store: productReducer,
     cart: cartReducer,
     auth: authReducer,
+    category: categoryReducer,
+    brand: brandReducer,
     form: formReducer,
 });
 

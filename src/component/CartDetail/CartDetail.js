@@ -17,58 +17,18 @@ import { calculateTotal } from '~/helpers/totalCaculate';
 import useCart from '~/hooks/useCart';
 import { addQtyItem, fetchCart, minusQtyItem, updateQuantity } from '~/redux/actions/cartAction';
 import QtyButton from '../QtyButton/QtyButton';
+import OverlayLoading from '../OverlayLoading/OverlayLoading';
 
 // import { Table } from 'antd';
 
 const cx = classNames.bind(styles);
 
-function CartDetail() {
-    const dispatch = useDispatch();
-    const cart = useSelector((state) => state.cart);
-    const isLoading = useSelector((state) => state.cart.isLoading);
-    const [refresh, setRefresh] = useState(false);
-
-    // console.log(cart);
-    // const { addToCart, isItemOnCart } = useCart();
-
-    // const [qty, setQty] = useState(cart.map(() => 1));
+function CartDetail({ cart }) {
     const history = useNavigate();
 
     const onClickItem = (id) => {
         history(`/ProductDetail/${id}`);
     };
-
-    useEffect(() => {
-        if (!isLoading) {
-            const fetching = async () => {
-                try {
-                    await dispatch(fetchCart());
-                } catch (err) {
-                    console.log(err);
-                }
-            };
-            fetching();
-            console.log(isLoading);
-        }
-    }, [dispatch]);
-
-    const handlePageRefresh = () => {
-        setRefresh((prevRefresh) => !prevRefresh);
-    };
-
-    window.onload = handlePageRefresh;
-
-    // useEffect(() => {
-    // c
-    // }, []);
-
-    console.log('ccccccccccccccc', cart.cartItems);
-
-    // const handleUpdateQTY = (value, index) => {
-    //     const newQty = [...qty];
-    //     newQty[index] = value;
-    //     setQty(newQty);
-    // };
 
     const totalSubTotal = (qty, price) => {
         return formatCurrency(parseFloat(qty) * parseFloat(price));
@@ -76,7 +36,6 @@ function CartDetail() {
 
     const columns = ['Product', 'Price', 'Quantity', 'Subtotal'];
 
-    // console.log(cart[0]);
     return (
         <div className={cx('row', 'cart-container')}>
             <div className={cx('col-12', 'productdetail-wrapper')}>

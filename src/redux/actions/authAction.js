@@ -13,6 +13,7 @@ export const UPLOAD_PROFILEPIC = 'UPLOAD_PROFILEPIC';
 export const FORGET_PASSWORD = 'FORGET_PASSWORD';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const RESET_ERROR = 'RESET_ERROR';
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 
 //Create dataStorage
 const saveDataToStorage = (name, data) => {
@@ -151,6 +152,50 @@ export const EditInfo = (username, name, phone, address) => {
                 // user: resData,
                 name: name,
                 address: address,
+            });
+        } catch (err) {
+            throw err;
+        }
+    };
+};
+
+export const uploadAvatar = (file) => {
+    return async (dispatch, getState) => {
+        const user = getState().auth.user;
+        dispatch({
+            type: AUTH_LOADING,
+        });
+        try {
+            console.log('đã vào nha');
+            const formData = new FormData();
+            formData.append('userId', user._id);
+            formData.append('avatar', file);
+
+            const response = await timeoutPromise(
+                fetch(`${API_URL}/auth/photo`, {
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        Tokens: user.token,
+                    },
+                    method: 'POST',
+                    body: formData,
+                }),
+            );
+            if (!response.ok) {
+                const errorResData = await response.json();
+                dispatch({
+                    type: AUTH_FAILURE,
+                });
+
+                Error(errorResData.err);
+            }
+
+            const resData = response;
+
+            dispatch({
+                type: UPLOAD_IMAGE,
+                imageUrl: resData,
             });
         } catch (err) {
             throw err;

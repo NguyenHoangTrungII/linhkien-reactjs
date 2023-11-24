@@ -17,6 +17,8 @@ const cx = classNames.bind(styles);
 function Search({ className = '' }) {
     const dispatch = useDispatch();
     const productListByName = useSelector((state) => state.store.productsbyname);
+    const isLoading = useSelector((state) => state.store.isLoadingSearch);
+
     const [showResult, setShowResult] = useState(false);
     const [searchResult, setsearchResult] = useState([]);
 
@@ -52,8 +54,8 @@ function Search({ className = '' }) {
                 setLoading(true);
                 await dispatch(getProductByName(deBounceValue));
 
-                const result = productListByName;
-                // setsearchResult(result);
+                // const result = productListByName;
+                setsearchResult(productListByName);
                 setLoading(false);
             } catch (err) {
                 console.log(err);
@@ -61,6 +63,9 @@ function Search({ className = '' }) {
         };
 
         fetching();
+
+        console.log(productListByName);
+        console.log(isLoading);
         // eslint-disable-next-line
     }, [deBounceValue]);
 
@@ -122,7 +127,7 @@ function Search({ className = '' }) {
                     <PopperWrapper>
                         <h4 className={cx('search-title')}>Product</h4>
 
-                        {a.map((result) => (
+                        {productListByName.map((result) => (
                             <CardHorizontal key={result._id} data={result} isPrice="true" />
                         ))}
                     </PopperWrapper>

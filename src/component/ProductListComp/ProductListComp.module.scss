@@ -1,5 +1,5 @@
 .productlist-container{
-    height: 1000px;
+    height: 1200px;
 }
 .filter-by-brand{
 }
@@ -36,10 +36,18 @@
 
 .filter-by-price{
     margin-top: 10px;
+    margin-bottom: 40px;
+
 }
 
 .slider-price{
     // ba: var(--primary);
     font-size: 50px;
+}
+
+.applyfilter-btn{
+    width: 100%;
+    font-size: 20px;
+    text-transform: uppercase;
 }
 
