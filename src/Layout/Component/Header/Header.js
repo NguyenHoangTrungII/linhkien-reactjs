@@ -227,13 +227,6 @@ function Header() {
                                 <BellOutlined className={cx('bell-icon')} value={'99+'} />
                             </div>
                         </Tippy>
-                        {/* User */}
-                        {/* <Image
-                        src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/4004db3287a0f283a9a69bfcdbd9b3d1~c5_100x100.jpeg?x-expires=1682298000&x-signature=%2Br1h2i4RNRtVPFhz2tPI6GGNZC4%3D"
-                        className={cx('user-avatar')}
-                        alt="Nguyen Van A"
-                        fallback="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
-                    /> */}
 
                         <Menu items={userMenu} onChange={handlerMenuChange}>
                             {currentUser ? (
