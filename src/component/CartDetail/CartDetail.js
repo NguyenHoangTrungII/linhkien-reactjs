@@ -19,8 +19,6 @@ import { addQtyItem, fetchCart, minusQtyItem, updateQuantity } from '~/redux/act
 import QtyButton from '../QtyButton/QtyButton';
 import OverlayLoading from '../OverlayLoading/OverlayLoading';
 
-// import { Table } from 'antd';
-
 const cx = classNames.bind(styles);
 
 function CartDetail({ cart }) {
@@ -82,7 +80,6 @@ function CartDetail({ cart }) {
                                                 inputStyle={cx('qty-button-cart')}
                                                 product={item}
                                                 updateQuantity={updateQuantity}
-                                                // onMinsqty={updateQuantity}
                                             />
                                         </td>
                                         <td>{totalSubTotal(item.quantity, item.price)}</td>

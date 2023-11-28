@@ -113,6 +113,9 @@ export const addToCart = (itemId) => {
             const resData = await response.json();
 
             let cartItem = resData.cart.items;
+
+            console.log('aaaa', cartItem);
+
             if (!response.ok) {
                 dispatch({
                     type: CART_FAILURE,
@@ -122,7 +125,7 @@ export const addToCart = (itemId) => {
 
             dispatch({
                 type: 'ADD_CART',
-                cartItem: cartItem,
+                cartItems: cartItem,
             });
         } catch (err) {
             throw err;
@@ -190,15 +193,28 @@ export const updateQuantity = (itemId, qty, oldqty) => {
                 throw new Error('Something went wrong!');
             }
 
+            const resData = await response.json();
+            let carts = resData.cart.items;
+
             if (oldqty - qty === 1) {
+                // dispatch({
+                //     type: 'ADD_QTY_ITEM',
+                //     cartItemId: itemId,
+                // });
+
                 dispatch({
-                    type: 'ADD_QTY_ITEM',
-                    cartItemId: itemId,
+                    type: FETCH_CART,
+                    carts: carts,
                 });
             } else {
+                // dispatch({
+                //     type: 'FETCH_CART',
+                //     cartItemId: itemId,
+                // });
+
                 dispatch({
-                    type: 'MINUS_QTY_ITEM',
-                    cartItemId: itemId,
+                    type: FETCH_CART,
+                    carts: carts,
                 });
             }
         } catch (err) {

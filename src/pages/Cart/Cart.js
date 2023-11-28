@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import OverlayLoading from '~/component/OverlayLoading/OverlayLoading';
 import { addQtyItem, fetchCart, minusQtyItem, updateQuantity } from '~/redux/actions/cartAction';
+import { Breadcrumbs } from '@mui/material';
+import BreadcrumbsComponent from '~/component/Breadcrumbs/Breadcrumbs ';
 
 function Cart() {
     const dispatch = useDispatch();
@@ -14,10 +16,6 @@ function Cart() {
     const isLoading = useSelector((state) => state.cart.isLoading);
     const [refresh, setRefresh] = useState(false);
 
-    // console.log(cart);
-    // const { addToCart, isItemOnCart } = useCart();
-
-    // const [qty, setQty] = useState(cart.map(() => 1));
     const history = useNavigate();
 
     const onClickItem = (id) => {
@@ -37,16 +35,12 @@ function Cart() {
         }
     }, []);
 
-    const handlePageRefresh = () => {
-        setRefresh((prevRefresh) => !prevRefresh);
-    };
-
-    window.onload = handlePageRefresh;
+    console.log(cart.cartItems);
 
     return (
-        <div>
+        <div style={{ paddingTop: 130 }}>
             {isLoading && <OverlayLoading isLoading={isLoading} />}
-
+            <BreadcrumbsComponent />
             <CartDetail cart={cart} />
         </div>
     );

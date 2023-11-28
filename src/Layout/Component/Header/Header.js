@@ -90,7 +90,7 @@ function Header() {
     const isUser = JSON.parse(localStorage.getItem('user'));
     // let cart = useSelector((state) => state.cart);
     // if (isUser) {
-    //     console.log(cart)
+    //     console.log(cart);
     //     cart = cart.cartItems.items[0].item;
     // } else {
     //     cart = [];
@@ -104,13 +104,9 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: '/@hoaa',
+            to: '/@trung',
         },
-        {
-            icon: <FontAwesomeIcon icon={faCoins} />,
-            title: 'Get coins',
-            to: '/coins',
-        },
+
         {
             icon: <FontAwesomeIcon icon={faGear} />,
             title: 'Setting',

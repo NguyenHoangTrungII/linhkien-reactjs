@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getProductFilter } from '~/redux/actions/productAction';
 import { getAllBrands } from '~/redux/actions/brandAction';
+import { Breadcrumbs, Link, Typography } from '@mui/material';
+import BreadcrumbsComponent from '~/component/Breadcrumbs/Breadcrumbs ';
 
 function ProductList() {
     const dispatch = useDispatch();
@@ -67,7 +69,13 @@ function ProductList() {
 
     // console.log('aaa', productsFilter);
 
-    return <div style={{ paddingTop: 200 }}>{<ProductListComp products={productsFilter} brand={brands} />}</div>;
+    return (
+        <div style={{ paddingTop: 100 }}>
+            <BreadcrumbsComponent />
+
+            <ProductListComp products={productsFilter} brand={brands} />
+        </div>
+    );
 }
 
 export default ProductList;
