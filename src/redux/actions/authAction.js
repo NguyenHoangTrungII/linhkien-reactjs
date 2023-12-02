@@ -203,49 +203,6 @@ export const uploadAvatar = (file) => {
     };
 };
 
-// export const GetUserInfo = () => {
-//     return async (dispatch, getState) => {
-//         const user = getState().auth.user;
-//         dispatch({
-//             type: AUTH_LOADING,
-//         });
-//         // const pushToken = await AskingExpoToken();
-//         try {
-//             const response = await timeoutPromise(
-//                 fetch(`${API_URL}/user/me`, {
-//                     headers: {
-//                         Accept: 'application/json',
-//                         'Content-Type': 'application/json; charset=utf-8',
-//                         Tokens: user.token,
-//                     },
-//                     method: 'GET',
-//                     body: JSON.stringify({
-//                         username,
-//                         password,
-//                         // pushTokens: [pushToken],
-//                     }),
-//                 }),
-//             );
-//             if (!response.ok) {
-//                 const errorResData = await response.json();
-//                 dispatch({
-//                     type: AUTH_FAILURE,
-//                 });
-//                 throw new Error(errorResData.err);
-//             }
-//             const resData = await response.json();
-//             saveDataToStorage('user', resData);
-//             // dispatch(setLogoutTimer(60 * 60 * 1000));
-//             dispatch({
-//                 type: LOGIN,
-//                 user: resData,
-//             });
-//         } catch (err) {
-//             throw err;
-//         }
-//     };
-// };
-
 export const ResetPassword = (password) => {
     return async (dispatch, getState) => {
         const user = getState().auth.user;
@@ -255,7 +212,7 @@ export const ResetPassword = (password) => {
         });
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/user/me`, {
+                fetch(`${API_URL}/auth/me`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
@@ -283,17 +240,54 @@ export const ResetPassword = (password) => {
     };
 };
 
-//Logout
-export const Logout = () => {
-    return (dispatch) => {
-        clearLogoutTimer();
-        localStorage.removeItem('user');
+export const Logout = (password) => {
+    return async (dispatch, getState) => {
+        const user = getState().auth.user;
+
         dispatch({
-            type: LOGOUT,
-            user: {},
+            type: AUTH_LOADING,
         });
+        try {
+            const response = await timeoutPromise(
+                fetch(`${API_URL}/auth/logout`, {
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        Tokens: user.token,
+                    },
+                    method: 'POST',
+                }),
+            );
+            if (!response.ok) {
+                const errorResData = await response.json();
+                dispatch({
+                    type: AUTH_FAILURE,
+                });
+                throw new Error(errorResData.err);
+            }
+            clearLogoutTimer();
+            localStorage.removeItem('user');
+            dispatch({
+                type: LOGOUT,
+                user: {},
+            });
+        } catch (err) {
+            throw err;
+        }
     };
 };
+
+//Logout
+// export const Logout = () => {
+//     return (dispatch) => {
+//         clearLogoutTimer();
+//         localStorage.removeItem('user');
+//         dispatch({
+//             type: LOGOUT,
+//             user: {},
+//         });
+//     };
+// };
 
 //Auto log out
 let timer;

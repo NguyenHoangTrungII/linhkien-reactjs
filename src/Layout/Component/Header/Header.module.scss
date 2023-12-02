@@ -131,6 +131,11 @@
 
 }
 
+.more-btn {
+    font-size: 22px;
+    background-color: var(--white);
+}
+
 .wishlist-icon:not([value=""])::after {
     content: attr(value);
 

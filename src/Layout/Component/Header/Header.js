@@ -29,6 +29,7 @@ import {
     faEllipsisVertical,
     faGear,
     faKeyboard,
+    faSignIn,
     faSignOut,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
@@ -85,20 +86,7 @@ const MENU_ITEMS = [
 function Header() {
     const [isActive, setIsActive] = useState(false);
 
-    const currentUser = true;
-
-    const isUser = JSON.parse(localStorage.getItem('user'));
-    // let cart = useSelector((state) => state.cart);
-    // if (isUser) {
-    //     console.log(cart);
-    //     cart = cart.cartItems.items[0].item;
-    // } else {
-    //     cart = [];
-    // }
-
-    // const userInfo = localStorage.getItem('user');
-    // const metghe = JSON.parse(userInfo);
-    // console.log(metghe);
+    const currentUser = !!localStorage.getItem('user');
 
     const userMenu = [
         {
@@ -117,38 +105,24 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log out',
-            to: '/logout',
+            to: '/',
             separate: true,
         },
     ];
 
-    const myCart = [
+    const userMenuLogOut = [
         {
-            name: 'RAM Corsair Vengeance RGB Pro 16GB (2 x 8GB)',
-            _id: '64a051007880d7c1ef9f0c8b',
-            thumbnailUrl:
-                'https://res.cloudinary.com/dew9jv3hy/image/upload/v1688228156/product-cloud/yuil8c8kknqv4lkjqexi.jpg',
-            categoryName: 'RAM',
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Setting',
+            to: '/setting',
         },
+
+        ...MENU_ITEMS,
         {
-            name: 'RAM Kingston HyperX Fury 32GB (2 x 16GB)',
-            _id: '64a0515c7880d7c1ef9f0d53',
-            thumbnailUrl: null,
-            categoryName: 'RAM',
-        },
-        {
-            name: 'RAM G.Skill Trident Z RGB 64GB (4 x 16GB)',
-            _id: '64a051a57880d7c1ef9f0e20',
-            thumbnailUrl:
-                'https://res.cloudinary.com/dew9jv3hy/image/upload/v1688228286/product-cloud/xmyljxoyvob5buxpxhs8.jpg',
-            categoryName: 'RAM',
-        },
-        {
-            name: 'RAM G.Skill Trident Z RGB 64GB (4 x 16GB)',
-            _id: '64a051f47880d7c1ef9f0ee7',
-            thumbnailUrl:
-                'https://res.cloudinary.com/dew9jv3hy/image/upload/v1688228394/product-cloud/f5tphkwncshmecepj3ql.png',
-            categoryName: 'RAM',
+            icon: <FontAwesomeIcon icon={faSignIn} />,
+            title: 'Log In',
+            to: '/Login',
+            separate: true,
         },
     ];
 
@@ -195,7 +169,7 @@ function Header() {
                             <HeartOutlined className={cx('wishlist-icon')} value={''} />
                         </div>
                         {/* Cart */}
-                        {/* <Cart data={cart} /> */}
+                        <Cart />
 
                         {/* Notify */}
                         <Tippy
@@ -224,7 +198,7 @@ function Header() {
                             </div>
                         </Tippy>
 
-                        <Menu items={userMenu} onChange={handlerMenuChange}>
+                        <Menu items={currentUser ? userMenu : userMenuLogOut} onChange={handlerMenuChange}>
                             {currentUser ? (
                                 <Image
                                     src={require('~/public/uploads/users/user-img.jpg')}
@@ -332,7 +306,7 @@ function Header() {
                                     </div>
                                 </div>
 
-                                <Menu items={userMenu} onChange={handlerMenuChange}></Menu>
+                                {/* <Menu items={userMenuLogOut} onChange={handlerMenuChange}></Menu> */}
                             </div>
                         </div>
                     </div>

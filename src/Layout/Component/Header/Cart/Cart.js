@@ -3,14 +3,28 @@ import { Link } from 'react-router-dom';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import Tippy from '@tippyjs/react/headless';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import config from '~/config';
 import styles from './Cart.module.scss';
 import { Wrapper as PopperWrapper } from '~/component/Popper';
 import CardHorizontal from '~/component/CardHorizontal';
+import { fetchCart } from '~/redux/actions/cartAction';
 
 const cx = classNames.bind(styles);
-function Cart({ data }) {
+function Cart() {
+    useEffect(() => {
+        const fetching = async () => {
+            try {
+                await dispatch(fetchCart());
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetching();
+    }, []);
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.cart.cartItems);
     return (
         <Tippy
             interactive
