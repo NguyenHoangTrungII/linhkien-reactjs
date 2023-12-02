@@ -1,0 +1,21 @@
+.breadcrumbs-container{
+    font-size: 18px !important;
+    font-family: 'ProximaNova', sans-serif !important;
+    padding: 10px 0 30px;
+    font-weight: 600 !important;
+
+    .breadcrumbs {
+        font-size: 18px;
+        font-family: 'ProximaNova', sans-serif !important;
+        text-transform: capitalize;
+
+    }
+    .current-breadcrumbs{
+        font-size: 18px;
+        font-family: 'ProximaNova', sans-serif !important;
+        color: var(--primary);
+        text-transform: capitalize;
+        font-weight: 600;
+
+    }
+}
