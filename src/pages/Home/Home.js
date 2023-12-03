@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { getAllProduct } from '~/redux/actions/productAction';
+import { getAllProduct, getProductByID } from '~/redux/actions/productAction';
 import HeroBanner from '~/component/HeroBanner';
 import FlashSale from '~/component/Home/FlashSale';
 import BrowseCategory from '~/component/Home/BrowseCategory';
@@ -17,7 +19,7 @@ import { getAllCategories } from '~/redux/actions/categoryAction';
 // borderColor: 'red',`;
 
 function Home() {
-    let [color, setColor] = useState('#ffffff');
+    const notify = () => toast('Add To Cart Success');
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.store.products);
     const categories = useSelector((state) => state.category.categories);
@@ -48,17 +50,29 @@ function Home() {
 
             <HeroBanner data={categories} />
 
-            <FlashSale FlashSaleProduct={getflashsaleproduct} />
+            <FlashSale toast={notify} FlashSaleProduct={getflashsaleproduct} />
 
             <BrowseCategory />
 
-            <BestSelling BestSellProduct={getbestsellproduct} />
+            <BestSelling toast={notify} BestSellProduct={getbestsellproduct} />
 
             <Advertsing />
 
-            <OurProduct OurProduct={productList} />
+            <OurProduct toast={notify} OurProduct={productList} />
 
             <Featured />
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </div>
     );
 }

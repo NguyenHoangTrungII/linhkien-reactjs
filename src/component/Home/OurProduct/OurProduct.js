@@ -9,7 +9,7 @@ import useCart from '~/hooks/useCart';
 
 const cx = classNames.bind(styles);
 
-function OurProduct({ OurProduct }) {
+function OurProduct({ OurProduct, toast }) {
     const { addToCart, isItemOnCart } = useCart();
 
     const sliderSettings = {
@@ -33,7 +33,13 @@ function OurProduct({ OurProduct }) {
                 {/* product */}
                 <div className={cx('category-list')}>
                     {/* <Slider /> */}
-                    <Slider arrowVisible={true} rowNumber={2} products={OurProduct} addToCart={addToCart} />
+                    <Slider
+                        arrowVisible={true}
+                        rowNumber={2}
+                        products={OurProduct}
+                        addToCart={addToCart}
+                        toast={toast}
+                    />
                     {/* <Slider /> */}
                 </div>
 

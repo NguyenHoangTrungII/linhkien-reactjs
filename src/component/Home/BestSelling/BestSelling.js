@@ -9,8 +9,8 @@ import useCart from '~/hooks/useCart';
 
 const cx = classNames.bind(styles);
 
-function BestSelling({ BestSellProduct }) {
-    const { addToCart, isItemOnCart } = useCart();
+function BestSelling({ BestSellProduct, toast }) {
+    const { addToCart, isItemOnCart, isOnCart } = useCart();
 
     const sliderSettings = {
         arrows: true,
@@ -39,7 +39,7 @@ function BestSelling({ BestSellProduct }) {
                 {/* product */}
                 <div className={cx('category-list')}>
                     {/* <Slider /> */}
-                    <Slider arrowVisible={false} products={BestSellProduct} addToCart={addToCart} />
+                    <Slider arrowVisible={false} products={BestSellProduct} addToCart={addToCart} toast={toast} />
                     {/* <Slider /> */}
                 </div>
 

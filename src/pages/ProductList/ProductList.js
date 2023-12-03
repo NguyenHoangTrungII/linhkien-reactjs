@@ -6,11 +6,27 @@ import { getProductFilter } from '~/redux/actions/productAction';
 import { getAllBrands } from '~/redux/actions/brandAction';
 import { Breadcrumbs, Link, Typography } from '@mui/material';
 import BreadcrumbsComponent from '~/component/Breadcrumbs/Breadcrumbs ';
+import OverlayLoading from '~/component/OverlayLoading/OverlayLoading';
 
 function ProductList() {
     const dispatch = useDispatch();
     const productsFilter = useSelector((state) => state.store.productFilter);
     const brands = useSelector((state) => state.brand.brands);
+    const isLoading = useSelector((state) => state.brand.isLoading);
+
+    useEffect(() => {
+        const fetching = async () => {
+            try {
+                await dispatch(getProductFilter(params));
+
+                await dispatch(getAllBrands());
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetching();
+    }, []);
 
     function getAllParamsFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -51,26 +67,12 @@ function ProductList() {
     const params = new URLSearchParams();
     appendParamsToSearchParams(allParams, params);
 
-    console.log(params.toString());
-
-    useEffect(() => {
-        const fetching = async () => {
-            try {
-                await dispatch(getProductFilter(params));
-
-                await dispatch(getAllBrands());
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        fetching();
-    }, []);
-
     // console.log('aaa', productsFilter);
 
     return (
         <div style={{ paddingTop: 100 }}>
+            {isLoading && <OverlayLoading isLoading={isLoading} />}
+
             <BreadcrumbsComponent />
 
             <ProductListComp products={productsFilter} brand={brands} />

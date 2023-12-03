@@ -44,7 +44,7 @@ function Cart() {
 
                                 {data.length > 5 && (
                                     <h4 className={cx('cart-bottom')}>
-                                        <Link>{`${data.length - 5} another products`}</Link>
+                                        <Link to={'/cart'}>{`${data.length - 5} another products`}</Link>
                                     </h4>
                                 )}
                             </>

@@ -61,13 +61,21 @@ function ProductListComp({ products = [], brand }) {
                 </Button>
             </div>
             <div className={cx('col-9', 'action-wrapper')}>
-                <ProductSlider
-                    arrowVisible={false}
-                    rowNumber={products.length / 3 < 1 ? 1 : Math.ceil(products.length / 3)}
-                    slidesToShow={products.length < 4 ? products.length : 3}
-                    products={products}
-                    addToCart={addToCart}
-                />
+                {products.length <= 0 ? (
+                    <img
+                        src={require('../../public/uploads/cart/empty_product.png')}
+                        alt="empty-cart"
+                        className={cx('empty-cart-photo')}
+                    />
+                ) : (
+                    <ProductSlider
+                        arrowVisible={false}
+                        rowNumber={products.length / 3 < 1 ? 1 : Math.ceil(products.length / 3)}
+                        slidesToShow={products.length < 4 ? products.length : 3}
+                        products={products}
+                        addToCart={addToCart}
+                    />
+                )}
             </div>
         </div>
     );

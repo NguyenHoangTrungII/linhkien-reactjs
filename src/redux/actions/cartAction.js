@@ -112,9 +112,7 @@ export const addToCart = (itemId) => {
 
             const resData = await response.json();
 
-            let cartItem = resData.cart.items;
-
-            console.log('aaaa', cartItem);
+            let cartItem = resData.updatedProduct;
 
             if (!response.ok) {
                 dispatch({

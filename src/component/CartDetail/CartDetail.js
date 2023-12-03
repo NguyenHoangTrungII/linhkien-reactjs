@@ -15,21 +15,30 @@ import { InputNumber } from 'antd';
 import { Value } from 'sass';
 import { calculateTotal } from '~/helpers/totalCaculate';
 import useCart from '~/hooks/useCart';
-import { addQtyItem, fetchCart, minusQtyItem, updateQuantity } from '~/redux/actions/cartAction';
+import { addQtyItem, fetchCart, minusQtyItem, removeFromCart, updateQuantity } from '~/redux/actions/cartAction';
 import QtyButton from '../QtyButton/QtyButton';
 import OverlayLoading from '../OverlayLoading/OverlayLoading';
+import { DeleteOutlined } from '@ant-design/icons';
 
 const cx = classNames.bind(styles);
 
 function CartDetail({ cart }) {
     const history = useNavigate();
-
+    const dispatch = useDispatch();
     const onClickItem = (id) => {
         history(`/ProductDetail/${id}`);
     };
 
     const totalSubTotal = (qty, price) => {
         return formatCurrency(parseFloat(qty) * parseFloat(price));
+    };
+
+    const handleDeleteCartItem = async (id) => {
+        try {
+            await dispatch(removeFromCart(id));
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const columns = ['Product', 'Price', 'Quantity', 'Subtotal'];
@@ -43,6 +52,7 @@ function CartDetail({ cart }) {
                             {columns.map((column, index) => (
                                 <th key={index}>{column}</th>
                             ))}
+                            <th className={cx('delete-column')}></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,9 +68,9 @@ function CartDetail({ cart }) {
                                                         (image) => image.isThumbnail === true,
                                                     )[0].url
                                                 }
-                                                alt={item.name}
+                                                alt={item.productId.name}
                                             />
-                                            <p>{item.name}</p>
+                                            <p>{item.productId.name}</p>
                                         </td>
                                         <td>
                                             <span>{formatCurrency(item.price)}</span>
@@ -83,6 +93,12 @@ function CartDetail({ cart }) {
                                             />
                                         </td>
                                         <td>{totalSubTotal(item.quantity, item.price)}</td>
+                                        <td
+                                            className={cx('delete-column')}
+                                            onClick={() => handleDeleteCartItem(item._id)}
+                                        >
+                                            {<DeleteOutlined />}
+                                        </td>
                                     </tr>
                                 ))}
                             </>

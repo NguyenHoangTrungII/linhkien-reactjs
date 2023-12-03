@@ -14,8 +14,8 @@ import WishList from '~/pages/WishList/WishList';
 import ProductList from '~/pages/ProductList';
 
 const publicRouters = [
-    { path: config.routes.home, component: Home },
     { path: config.routes.productdetail, component: ProductDetail },
+    { path: config.routes.home, component: Home },
     { path: config.routes.wishlist, component: WishList },
     { path: config.routes.checkout, component: CheckOut },
     { path: config.routes.contact, component: Contact },

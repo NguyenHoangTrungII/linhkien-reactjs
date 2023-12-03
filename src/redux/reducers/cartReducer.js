@@ -21,12 +21,27 @@ const initialState = {
 };
 
 const findIndex = (cartList = [], id) => {
-    console.log('troi oi la troi', cartList);
+    //     console.log(cartList);
+
     const index = cartList.findIndex((cart) => {
-        return cart._id === id;
+        return cart.productId._id === id;
     });
     return index;
 };
+// const findIndex = (cartList = [], id) => {
+//     let foundIndex = -1;
+
+//     console.log(cartList);
+//     console.log(id);
+//     cartList.map((cart, index) => {
+//         console.log(cart.productId._id);
+//         if (cart.productId._id === id) {
+//             foundIndex = index;
+//         }
+//     });
+
+//     return foundIndex;
+// };
 
 export const cartReducer = (state = initialState, action) => {
     const cartList = state.cartItems;
@@ -51,23 +66,32 @@ export const cartReducer = (state = initialState, action) => {
             };
 
         case ADD_CART:
-            const id = action.cartItems._id;
+            const id = action.cartItems.productId._id;
+            // const cartList = [...state.cartItems.items];
+
+            console.log(action.cartItems);
+            console.log(cartList);
             if (cartList.length !== 0) {
                 const index = findIndex(cartList, id);
+
+                console.log(index);
                 if (index >= 0) {
-                    cartList[index] = new Cart(action.cartItems, +cartList[index].quantity + 1);
+                    // cartList[index] = new Cart(action.cartItems, +cartList[index].quantity + 1);
+                    cartList[index].quantity = cartList[index].quantity + 1;
+                    console.log(cartList[index].quantity);
                 } else {
-                    const newItem = new Cart(action.cartItems, 1);
-                    cartList.push(newItem);
+                    // const newItem = new Cart(action.cartItems, 1);
+                    cartList.push(action.cartItems);
+                    console.log(cartList);
                 }
             } else {
-                const newItem = new Cart(action.cartItems, 1);
-                cartList.push(newItem);
+                // const newItem = new Cart(action.cartItems, 1);
+                cartList.push(action.cartItems);
             }
 
             return {
                 ...state,
-                cartItems: { ...state.cartItems },
+                // cartItems: { ...state.cartItems },
                 isLoading: false,
             };
         case REMOVE_FROM_CART:
@@ -76,7 +100,7 @@ export const cartReducer = (state = initialState, action) => {
             cartList.splice(indexItem, 1);
             return {
                 ...state,
-                cartItems: { ...state.cartItems },
+                // cartItems: { ...state.cartItems },
                 isLoading: false,
             };
         case MINUS_QTY_ITEM:

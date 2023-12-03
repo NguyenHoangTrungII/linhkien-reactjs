@@ -45,24 +45,6 @@ function Cart() {
         // eslint-disable-next-line
     }, [deBounceValue]);
 
-    // function handleChange(e) {
-    //     const searchValue = e.target.value;
-    //     if (!searchValue.startsWith(' ')) setSearchValue(e.target.value);
-    // }
-
-    // function handleClear() {
-    //     setSearchValue('');
-    //     setsearchResult([]);
-    //     inputRef.current.focus();
-    // }
-
-    // const handleHideResult = () => {
-    //     setShowResult(false);
-    // };
-
-    // console.log('searchResult', searchResult.length > 0);
-    // console.log('showResult', showResult);
-
     return (
         //ignore Teddy warning
 

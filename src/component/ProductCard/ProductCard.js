@@ -10,11 +10,13 @@ import { HeartOutlined } from '@ant-design/icons/lib/icons';
 import formatCurrency from '~/helpers/currencyFormatter';
 import useCart from '~/hooks/useCart';
 import { useState, useCallback, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 
-function ProductCard({ product, addToCart }) {
-    const [cartAction, setCartAction] = useState(false);
+function ProductCard({ product, addToCart, toast = false }) {
+    // const [cartAction, setCartAction] = useState(false);
+
     const history = useNavigate();
     const onClickItem = () => {
         if (!product) return;
@@ -22,13 +24,9 @@ function ProductCard({ product, addToCart }) {
         history(`/ProductDetail/${product._id}`);
     };
 
-    // const itemOnCart = isItemOnCart ? isItemOnCart(product._id) : false;
-
-    // console.log(addToCart)useCallback;
-
     const handleAddToCart = useCallback(() => {
         addToCart(product);
-        setCartAction(!cartAction);
+        !!toast && toast();
     }, [addToCart, product]);
 
     const image = product.images.filter((image) => image.isThumbnail === true);
@@ -54,9 +52,7 @@ function ProductCard({ product, addToCart }) {
                     </div>
 
                     <div className={cx('product-chose')} onClick={handleAddToCart}>
-                        <h3 className={cx('add-to-cart')}>
-                            {cartAction === false ? 'Add to Cart' : 'Remove out Cart'}
-                        </h3>
+                        <h3 className={cx('add-to-cart')}>{'Add to Cart'}</h3>
                     </div>
                 </div>
                 <div className={cx('product-body')} onClick={onClickItem}>

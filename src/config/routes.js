@@ -1,6 +1,5 @@
 const routes = {
     home: '/',
-    productdetail: '/ProductDetail/:IdProduct',
     accountdetail: '/AccountDetail',
     wishlist: '/WishList',
     login: '/LogIn',
@@ -9,6 +8,7 @@ const routes = {
     contact: '/Contact',
     cart: '/Cart',
     productlist: '/ProductList/advanced-search',
+    productdetail: '/ProductDetail/:IdProduct',
 };
 
 export default routes;

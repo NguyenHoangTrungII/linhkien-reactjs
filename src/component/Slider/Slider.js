@@ -11,7 +11,7 @@ import './Slider.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Slider({ products = [], arrowVisible = true, rowNumber = 1, slidesToShow = 4, addToCart }) {
+function Slider({ products = [], arrowVisible = true, rowNumber = 1, slidesToShow = 4, addToCart, toast }) {
     function PrevArrow(props) {
         const { style, onClick } = props;
         return (
@@ -70,13 +70,11 @@ function Slider({ products = [], arrowVisible = true, rowNumber = 1, slidesToSho
         nextArrow: <NextArrow />,
     };
 
-    // console.log('Slider', products);
-
     return (
         <div className="container">
             <SliderProduct {...settings}>
                 {products.map((product, index) => {
-                    return <ProductCard key={index} product={product} addToCart={addToCart} />;
+                    return <ProductCard key={index} product={product} addToCart={addToCart} toast={toast} />;
                 })}
             </SliderProduct>
         </div>
