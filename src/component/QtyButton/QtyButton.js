@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styles from './QtyButton.module.scss';
-import Slider from 'react-slick';
+import React, { useState } from 'react';
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import classNames from 'classnames/bind';
+
+import { useDispatch } from 'react-redux';
+import styles from './QtyButton.module.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
 
 const cx = classNames.bind(styles);
 

@@ -8,15 +8,11 @@ import { EyeOutlined } from '@ant-design/icons/lib/icons';
 import { HeartOutlined } from '@ant-design/icons/lib/icons';
 
 import formatCurrency from '~/helpers/currencyFormatter';
-import useCart from '~/hooks/useCart';
-import { useState, useCallback, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { useCallback } from 'react';
 
 const cx = classNames.bind(styles);
 
 function ProductCard({ product, addToCart, toast = false }) {
-    // const [cartAction, setCartAction] = useState(false);
-
     const history = useNavigate();
     const onClickItem = () => {
         if (!product) return;
@@ -27,7 +23,7 @@ function ProductCard({ product, addToCart, toast = false }) {
     const handleAddToCart = useCallback(() => {
         addToCart(product);
         !!toast && toast();
-    }, [addToCart, product]);
+    }, [addToCart, product, toast]);
 
     const image = product.images.filter((image) => image.isThumbnail === true);
 
@@ -62,7 +58,7 @@ function ProductCard({ product, addToCart, toast = false }) {
                     <div className={cx('product-another ')}>
                         {/* <p className={) */}
                         <h3 className={cx('product-name')}>
-                            <a href="#">{product.name}</a>
+                            <span>{product.name}</span>
                         </h3>
                         <h4 className={cx('product-price')}>
                             {formatCurrency(product.price)}

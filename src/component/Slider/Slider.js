@@ -1,13 +1,13 @@
 import React from 'react';
 import SliderProduct from 'react-slick';
-import ProductCard from '../ProductCard';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { RightOutlined } from '@ant-design/icons/lib/icons';
 import classNames from 'classnames/bind';
+
+import ProductCard from '../ProductCard';
 import styles from './Slider.module.scss';
 import './Slider.module.scss';
-// import useCart from '~/hooks/useCart';
 
 const cx = classNames.bind(styles);
 

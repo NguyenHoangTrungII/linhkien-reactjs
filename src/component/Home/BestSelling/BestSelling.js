@@ -10,13 +10,11 @@ import useCart from '~/hooks/useCart';
 const cx = classNames.bind(styles);
 
 function BestSelling({ BestSellProduct, toast }) {
-    const { addToCart, isItemOnCart, isOnCart } = useCart();
+    const { addToCart } = useCart();
 
-    const sliderSettings = {
-        arrows: true,
-    };
-
-    // console.log(addToCart);
+    // const sliderSettings = {
+    //     arrows: true,
+    // };
 
     return (
         <div className={cx('wrapper')}>
@@ -38,9 +36,7 @@ function BestSelling({ BestSellProduct, toast }) {
 
                 {/* product */}
                 <div className={cx('category-list')}>
-                    {/* <Slider /> */}
                     <Slider arrowVisible={false} products={BestSellProduct} addToCart={addToCart} toast={toast} />
-                    {/* <Slider /> */}
                 </div>
 
                 <Separator className={cx('separator')} />

@@ -1,15 +1,10 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ProductListComp.module.scss';
-import { Checkbox, Radio, Form, Slider } from 'antd';
+import { Slider } from 'antd';
 import CheckBoxInput from '../CheckBoxInput';
 import Separator from '../Separator';
 import formatCurrency from '~/helpers/currencyFormatter';
-import { colors } from '@mui/material';
-
 import useCart from '~/hooks/useCart';
 import ProductSlider from '../Slider';
 import Button from '../Button';
@@ -17,9 +12,7 @@ import Button from '../Button';
 const cx = classNames.bind(styles);
 
 function ProductListComp({ products = [], brand }) {
-    const { addToCart, isItemOnCart } = useCart();
-
-    const [value, setValue] = useState(1000000);
+    const { addToCart } = useCart();
 
     return (
         <div className={cx('row', 'productlist-container')}>
@@ -30,12 +23,8 @@ function ProductListComp({ products = [], brand }) {
 
                     <div className={cx('name-brands')}>
                         {brand.map((item, index) => {
-                            return <CheckBoxInput text={item.name} to={item._id} />;
+                            return <CheckBoxInput key={index} text={item.name} to={item._id} />;
                         })}
-                        {/* <CheckBoxInput text="Intel" />
-                        <CheckBoxInput text="Kingston" />
-                        <CheckBoxInput text="Corsair" />
-                        <CheckBoxInput text="AMD" /> */}
                     </div>
                 </div>
                 <div className={cx('filter-by-price')}>

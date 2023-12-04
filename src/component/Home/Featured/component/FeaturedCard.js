@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function FeaturedCard({ size, data }) {
-    // Tạo dynamic class name dựa trên prop size
     const dynamicClassName = cx('container', {
         small: size === 'small',
         medium: size === 'medium',
@@ -15,7 +14,7 @@ function FeaturedCard({ size, data }) {
     return (
         <div className={dynamicClassName}>
             {/* img */}
-            <img src={data.img} className={cx('img')} />
+            <img src={data.img} className={cx('img')} alt="anh" />
             <div className={cx('content')}>
                 {/* featured */}
                 <span className={cx('featured')}>{data.title}</span>

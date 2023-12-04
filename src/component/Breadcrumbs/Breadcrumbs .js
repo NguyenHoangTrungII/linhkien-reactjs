@@ -22,17 +22,15 @@ function BreadcrumbsComponent() {
     };
 
     const findName = (id) => {
-        console.log(products);
         const foundProduct = products.find((product) => product._id.toString() === id);
 
         return foundProduct ? foundProduct.name : '';
     };
 
     const cx = classNames.bind(styles);
-
     return (
         <Breadcrumbs aria-label="breadcrumb" className={cx('breadcrumbs-container')}>
-            <Link color="inherit" fontSize="inherit" href={`/`} underline="false">
+            <Link color="inherit" fontSize="inherit" to={`/`} underline="false">
                 Home
             </Link>
             {pathSegments.slice(0, -1).map((segment, index) => (

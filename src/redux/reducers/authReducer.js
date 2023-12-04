@@ -17,7 +17,7 @@ const initialState = {
     user: {},
     notification: {},
     isLoading: false,
-    error: false,
+    error: {},
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -37,7 +37,6 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: true,
-                // error: false,
             };
         }
         case LOGIN:
@@ -55,8 +54,10 @@ export const authReducer = (state = initialState, action) => {
             };
         }
         case AUTH_FAILURE:
+            console.log(action);
             return {
                 ...state,
+                error: action.error,
                 isLoading: false,
             };
 

@@ -1,10 +1,7 @@
 import classNames from 'classnames/bind';
-import { RightOutlined, LeftOutlined } from '@ant-design/icons/lib/icons';
 
 import styles from './FlashSale.module.scss';
 import SmallNotification from '~/component/SmallNotification';
-import ProductCard from '~/component/ProductCard';
-import { Carousel, Stack } from 'react-bootstrap';
 import Button from '~/component/Button';
 import Separator from '~/component/Separator/Separator';
 import Slider from '~/component/Slider';
@@ -12,8 +9,8 @@ import useCart from '~/hooks/useCart';
 
 const cx = classNames.bind(styles);
 
-function FlashSale({ FlashSaleProduct }) {
-    const { addToCart, isItemOnCart } = useCart();
+function FlashSale({ FlashSaleProduct, toast }) {
+    const { addToCart } = useCart();
 
     return (
         <div className={cx('wrapper')}>
@@ -47,7 +44,7 @@ function FlashSale({ FlashSaleProduct }) {
                 </div>
 
                 {/* <Slider /> */}
-                <Slider products={FlashSaleProduct} addToCart={addToCart} />
+                <Slider products={FlashSaleProduct} addToCart={addToCart} toast={toast} />
 
                 <div className={cx('btn')}>
                     <Button primary className={cx('btn-view-all')}>

@@ -121,16 +121,16 @@
     display: block;
   }
   
-  .product .product-body .product-name a {
+  .product .product-body .product-name span {
     color: #000;
   }
   
-  .product .product-body .product-name>a {
+  .product .product-body .product-name>span {
     font-weight: 700;
   }
   
-  .product .product-body .product-name>a:hover,
-  .product .product-body .product-name>a:focus {
+  .product .product-body .product-name>span:hover,
+  .product .product-body .product-name>span:focus {
     color: var(--primary-color);
   }
   

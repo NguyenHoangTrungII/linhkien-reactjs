@@ -1,19 +1,11 @@
 import classNames from 'classnames/bind';
-import Slider from '~/component/Slider';
 
 import styles from './Featured.module.scss';
 import SmallNotification from '~/component/SmallNotification';
-import { Link } from 'react-router-dom';
 import FeaturedCard from './component/FeaturedCard';
 
 const cx = classNames.bind(styles);
-
 function Featured() {
-    const imgsrc2 = require('~/public/uploads/featured/Featured_3.png');
-    const imgsrc1 = require('~/public/uploads/featured/Featured_5.png');
-    const imgsrc3 = require('~/public/uploads/featured/Featured_1.png');
-    const imgsrc4 = require('~/public/uploads/featured/Featured_2.png');
-
     const feature = [
         {
             _id: 1,

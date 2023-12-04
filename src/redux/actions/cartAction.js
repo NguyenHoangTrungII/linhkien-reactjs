@@ -5,52 +5,16 @@ export const CART_FAILURE = 'CART_FAILURE';
 export const FETCH_CART = 'FETCH_CART';
 export const ADD_CART = 'ADD_CART';
 export const RESET_CART = 'RESET_CART';
-// export const DES_CART_QUANTITY = 'DES_CART_QUANTITY';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-
 export const ADD_QTY_ITEM = 'ADD_QTY_ITEM';
-// export const ADD_TO_CART = 'ADD_TO_CART';
-// export const CLEAR_CART = 'CLEAR_CART';
+export const CLEAR_CART = 'CLEAR_CART';
 export const MINUS_QTY_ITEM = 'MINUS_QTY_ITEM';
-// export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-// export const SET_CART_ITEMS = 'SET_CART_ITEMS';
-
-// export const setCartItems = (items = []) => ({
-//     type: SET_CART_ITEMS,
-//     payload: items,
-// });
-
-// export const addToCart = (product) => ({
-//     type: ADD_TO_CART,
-//     payload: product,
-// });
-
-// export const removeFromCart = (id) => ({
-//     type: REMOVE_FROM_CART,
-//     payload: id,
-// });
-
-// export const clearCart = () => ({
-//     type: CLEAR_CART,
-// });
-
-// export const addQtyItem = (id) => ({
-//     type: ADD_QTY_ITEM,
-//     payload: id,
-// });
-
-// export const minusQtyItem = (id) => ({
-//     type: MINUS_QTY_ITEM,
-//     payload: id,
-// });
 
 export const fetchCart = () => {
     return async (dispatch, getState) => {
         const user = getState().auth.user;
-        const emptyCart = {
-            items: [],
-        };
-        if (user.user._id != undefined) {
+
+        if (user.user._id !== undefined) {
             dispatch({
                 type: CART_LOADING,
             });
@@ -72,13 +36,22 @@ export const fetchCart = () => {
                     throw new Error("Something went wrong!, can't get your carts");
                 }
                 const resData = await response.json();
-                let carts = resData.cart.items;
-                dispatch({
-                    type: FETCH_CART,
-                    carts: carts,
-                    // total: resData.cart.totalPrice + 50000,
-                    // totalnoship: resData.cart.totalPrice,
-                });
+                console.log(resData);
+                if (resData.cart != null) {
+                    dispatch({
+                        type: FETCH_CART,
+                        carts: resData.cart.items,
+                        // total: resData.cart.totalPrice + 50000,
+                        // totalnoship: resData.cart.totalPrice,
+                    });
+                } else {
+                    dispatch({
+                        type: FETCH_CART,
+                        carts: [],
+                        // total: resData.cart.totalPrice + 50000,
+                        // totalnoship: resData.cart.totalPrice,
+                    });
+                }
             } catch (err) {
                 throw err;
             }

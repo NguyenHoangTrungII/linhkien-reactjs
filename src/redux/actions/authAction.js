@@ -85,11 +85,14 @@ export const Login = (username, password) => {
                 }),
             );
             if (!response.ok) {
-                const errorResData = await response.json();
+                const error = await response.json();
+
+                console.log(error);
                 dispatch({
                     type: AUTH_FAILURE,
+                    error,
                 });
-                throw new Error(errorResData.err);
+                throw new Error(error.err);
             }
             const resData = await response.json();
             // console.log(resData.name);

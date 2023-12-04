@@ -7,14 +7,18 @@ import styles from './LogIn.module.scss';
 import InputText from '../Input/Input';
 import Button from '../Button/Button';
 import { Login } from '~/redux/actions/authAction';
+import { ToastContainer, toast } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 
 function LogInComp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const error = useSelector((state) => state.auth.error);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    console.log(error);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -28,7 +32,12 @@ function LogInComp() {
     const handleSubmit = async () => {
         try {
             console.log(email, password);
-            await dispatch(Login(email, password));
+            const loginPromise = dispatch(Login(email, password));
+            await toast.promise(loginPromise, {
+                pending: 'Logging in...',
+                success: 'Logged in successfully ',
+                error: error.error,
+            });
             navigate('/');
         } catch (err) {
             console.log(err);
@@ -74,7 +83,21 @@ function LogInComp() {
                     </div>
                 </div>
             </div>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
+
         // </div>
     );
 }

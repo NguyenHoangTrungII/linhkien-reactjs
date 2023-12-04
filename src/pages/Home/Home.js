@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { getAllProduct, getProductByID } from '~/redux/actions/productAction';
+import { getAllProduct } from '~/redux/actions/productAction';
 import HeroBanner from '~/component/HeroBanner';
 import FlashSale from '~/component/Home/FlashSale';
 import BrowseCategory from '~/component/Home/BrowseCategory';
@@ -13,10 +13,7 @@ import OurProduct from '~/component/Home/OurProduct';
 import Featured from '~/component/Home/Featured';
 import OverlayLoading from '~/component/OverlayLoading/OverlayLoading';
 import { getAllCategories } from '~/redux/actions/categoryAction';
-
-// const override = css`display: 'block',
-// margin: '0 auto',
-// borderColor: 'red',`;
+import { getProductsByRange } from '~/helpers/getProductByRange';
 
 function Home() {
     const notify = () => toast('Add To Cart Success');
@@ -28,21 +25,14 @@ function Home() {
     useEffect(() => {
         const fetching = async () => {
             try {
-                await dispatch(getAllProduct());
-
-                await dispatch(getAllCategories());
+                await Promise.all([dispatch(getAllProduct()), dispatch(getAllCategories())]);
             } catch (err) {
                 console.log(err);
             }
         };
 
         fetching();
-
-        console.log('category', categories);
-    }, []);
-
-    const getbestsellproduct = productList.slice(0, 4);
-    const getflashsaleproduct = productList.slice(4, 8);
+    }, [dispatch]);
 
     return (
         <div>
@@ -50,11 +40,11 @@ function Home() {
 
             <HeroBanner data={categories} />
 
-            <FlashSale toast={notify} FlashSaleProduct={getflashsaleproduct} />
+            <FlashSale toast={notify} FlashSaleProduct={getProductsByRange(productList, 0, 4)} />
 
             <BrowseCategory />
 
-            <BestSelling toast={notify} BestSellProduct={getbestsellproduct} />
+            <BestSelling toast={notify} BestSellProduct={getProductsByRange(productList, 4, 8)} />
 
             <Advertsing />
 

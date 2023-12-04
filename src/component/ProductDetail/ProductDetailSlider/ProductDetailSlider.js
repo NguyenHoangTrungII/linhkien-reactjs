@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './ProductDetailSlider.module.scss';
-import Slider from 'react-slick';
 import classNames from 'classnames/bind';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { HeartFilled, HeartOutlined, StarOutlined } from '@ant-design/icons';
+import { HeartOutlined, StarOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 
 import QtyButton from '~/component/QtyButton/QtyButton';
@@ -17,13 +16,6 @@ const cx = classNames.bind(styles);
 const ProductDetailSlider = () => {
     const [indexThumbnail, setIndexThumbnail] = useState(0);
     const productdetail = useSelector((state) => state.store.productsbyID);
-
-    // const images = [
-    //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
-    //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_F4-3000C16D-32GTZR.jpg'),
-    //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
-    //     require('~/public/uploads/products/RAM/Thumbnail/Product_Thumbnail_570x470_Gskill_Trident_Z_9.jpg'),
-    // ];
 
     const handleOnClickImg = (index) => {
         setIndexThumbnail(index);
@@ -113,7 +105,7 @@ const ProductDetailSlider = () => {
                         <div className={cx('support-infos')}>
                             <div className={cx('support-info-detail')}>
                                 {/* icon */}
-                                <img src={require('~/public/uploads/icons/icon-delivery.png')} />
+                                <img src={require('~/public/uploads/icons/icon-delivery.png')} alt="anh" />
                                 {/* content */}
                                 <div className={cx('content')}>
                                     {/* title */}
@@ -125,7 +117,7 @@ const ProductDetailSlider = () => {
 
                             <div className={cx('support-info-detail')}>
                                 {/* icon */}
-                                <img src={require('~/public/uploads/icons/Icon-return.png')} />
+                                <img src={require('~/public/uploads/icons/Icon-return.png')} alt="anh" />
                                 {/* content */}
                                 <div className={cx('content')}>
                                     {/* title */}
