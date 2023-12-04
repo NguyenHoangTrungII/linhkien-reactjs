@@ -9,6 +9,10 @@
 This project is just developing.
 
 ## :star: Get Started
+``` bash
+# clone
+git clone https://github.com/NguyenHoangTrungII/linhkien-reactjs.git
+```
 
 ``` bash
 # install dependencies
