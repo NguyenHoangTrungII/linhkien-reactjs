@@ -9,6 +9,7 @@ import {
     CART_FAILURE,
     MINUS_QTY_ITEM,
     ADD_QTY_ITEM,
+    UPDATE_CART,
 } from '../actions/cartAction';
 // import { LOGOUT } from '../auth/authActions';
 
@@ -20,28 +21,29 @@ const initialState = {
     isLoading: false,
 };
 
-const findIndex = (cartList = [], id) => {
-    //     console.log(cartList);
-
-    const index = cartList.findIndex((cart) => {
-        return cart.productId._id === id;
-    });
-    return index;
-};
 // const findIndex = (cartList = [], id) => {
-//     let foundIndex = -1;
 
-//     console.log(cartList);
-//     console.log(id);
-//     cartList.map((cart, index) => {
-//         console.log(cart.productId._id);
-//         if (cart.productId._id === id) {
-//             foundIndex = index;
-//         }
+//     const index = cartList.findIndex((cart) => {
+//         return cart.product.id === id;
 //     });
-
-//     return foundIndex;
+//     return index;
 // };
+const findIndex = (cartList = [], id) => {
+    let foundIndex = -1;
+
+    console.log(cartList);
+    console.log(id);
+    cartList.map((cart, index) => {
+        console.log(cart.product.id);
+        console.log(id);
+
+        if (cart.productId === id) {
+            foundIndex = index;
+        }
+    });
+
+    return foundIndex;
+};
 
 export const cartReducer = (state = initialState, action) => {
     const cartList = state.cartItems;
@@ -57,6 +59,8 @@ export const cartReducer = (state = initialState, action) => {
                 isLoading: false,
             };
         case FETCH_CART:
+            console.log(action);
+
             return {
                 ...state,
                 cartItems: action.carts,
@@ -66,11 +70,12 @@ export const cartReducer = (state = initialState, action) => {
             };
 
         case ADD_CART:
-            const id = action.cartItems.productId._id;
+            console.log('action', action);
+
+            const id = action.cartItems.id;
             // const cartList = [...state.cartItems.items];
 
-            console.log(action.cartItems);
-            console.log(cartList);
+            console.log('cartlist', cartList);
             if (cartList.length !== 0) {
                 const index = findIndex(cartList, id);
 
@@ -91,7 +96,7 @@ export const cartReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                // cartItems: { ...state.cartItems },
+                cartItems: [...state.cartItems],
                 isLoading: false,
             };
         case REMOVE_FROM_CART:
@@ -119,6 +124,20 @@ export const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cartItems: { ...state.cartItems },
+                isLoading: false,
+            };
+        }
+        case UPDATE_CART: {
+            console.log(cartList);
+            const cartItemId = action.carts.productId;
+            const index = findIndex(cartList, cartItemId);
+
+            cartList[index].quantity = action.carts.quantity;
+
+            console.log(state.cartItems);
+            return {
+                ...state,
+                cartItems: [...state.cartItems],
                 isLoading: false,
             };
         }

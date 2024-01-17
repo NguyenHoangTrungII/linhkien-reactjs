@@ -1,5 +1,11 @@
+import MenuAccount from './Component/MenuAccount/MenuAccount';
+
 function Account() {
-    return <div></div>;
+    return (
+        <div>
+            <MenuAccount />
+        </div>
+    );
 }
 
 export default Account;

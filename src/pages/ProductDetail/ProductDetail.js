@@ -11,6 +11,7 @@ function ProductDetail() {
     const dispatch = useDispatch();
     const productDetail = useSelector((state) => state.store.productsbyID);
     const isLoading = useSelector((state) => state.store.isLoading);
+
     useEffect(() => {
         const fetching = async () => {
             try {

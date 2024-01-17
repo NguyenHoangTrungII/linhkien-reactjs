@@ -34,10 +34,9 @@ import {
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // import Image from '~/component/image';
-import images from '~/assets/images';
 import config from '~/config';
 import styles from './Header.module.scss';
 import Search from './Search';
@@ -45,8 +44,6 @@ import Image from '~/component/image';
 import Menu from '~/component/Popper/Menu';
 
 import { Wrapper as PopperWrapper } from '~/component/Popper';
-import CardHorizontal from '~/component/CardHorizontal';
-import SmallNotification from '~/component/SmallNotification/SmallNotification';
 import Cart from './Cart/Cart';
 
 const cx = classNames.bind(styles);
@@ -86,13 +83,15 @@ const MENU_ITEMS = [
 function Header() {
     const [isActive, setIsActive] = useState(false);
 
+    const user = useSelector((state) => state.auth.user);
+
     const currentUser = !!localStorage.getItem('user');
 
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: '/@trung',
+            to: 'Account/@trung',
         },
 
         {
@@ -142,6 +141,8 @@ function Header() {
     const HandleCloseClick = () => {
         setIsActive(!isActive);
     };
+
+    console.log(user);
 
     return (
         <header className={cx('wrapper')}>
@@ -201,9 +202,13 @@ function Header() {
                         <Menu items={currentUser ? userMenu : userMenuLogOut} onChange={handlerMenuChange}>
                             {currentUser ? (
                                 <Image
-                                    src={require('~/public/uploads/users/user-img.jpg')}
+                                    src={
+                                        user.avatar == null
+                                            ? require('~/public/uploads/users/user-img.jpg')
+                                            : user.avatar
+                                    }
                                     className={cx('user-avatar')}
-                                    alt="Nguyen Van A"
+                                    alt={user.name}
                                     fallback=""
                                 />
                             ) : (

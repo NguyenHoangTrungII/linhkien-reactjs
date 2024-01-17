@@ -40,11 +40,11 @@ export const authReducer = (state = initialState, action) => {
             };
         }
         case LOGIN:
+            console.log(action);
             return {
                 user: action.user,
                 name: action.name,
                 address: action.address,
-                // notification: UserMessages['user.login.success'],
                 isLoading: false,
             };
         case SIGN_UP: {
@@ -93,11 +93,15 @@ export const authReducer = (state = initialState, action) => {
             };
         case UPLOAD_IMAGE:
             // state.user.profilePicture = action.profilePic;
+            console.log(state.user.avatar);
+            state.user.avatar = action.imageUrl;
+            console.log(state.user.avatar);
+
             return {
-                // ...state,
-                // user: {
-                //     ...state.user,
-                // },
+                ...state,
+                user: {
+                    ...state.user,
+                },
                 isLoading: false,
             };
         default:

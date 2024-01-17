@@ -1,4 +1,6 @@
 import classNames from 'classnames/bind';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import styles from './ProductListComp.module.scss';
 import { Slider } from 'antd';
@@ -13,7 +15,22 @@ const cx = classNames.bind(styles);
 
 function ProductListComp({ products = [], brand }) {
     const { addToCart } = useCart();
+    const dispatch = useDispatch();
+    const [priceRange, setPriceRange] = useState([500000, 10000000]);
+    const [selectedBrands, setSelectedBrands] = useState([]);
 
+    const applyFilter = () => {
+        const params = new URLSearchParams();
+        params.append('minPrice', priceRange[0]);
+        params.append('maxPrice', priceRange[1]);
+        // selectedBrands.forEach((brandId) => {
+        //     params.append('brandId', brandId);
+        // });
+
+        console.log('pramas:', params);
+
+        // dispatch(filterProducts(params));
+    };
     return (
         <div className={cx('row', 'productlist-container')}>
             <div className={cx('col-3', 'action-wrapper')}>
@@ -35,7 +52,8 @@ function ProductListComp({ products = [], brand }) {
                             range
                             step={1}
                             min={0}
-                            defaultValue={[500000, 10000000]}
+                            defaultValue={priceRange}
+                            onChange={setPriceRange}
                             max={100000000}
                             tipFormatter={formatCurrency}
                             className={cx('slider-price')}
@@ -45,7 +63,7 @@ function ProductListComp({ products = [], brand }) {
                         />
                     </div>
                 </div>
-                <Button outline large className={cx('applyfilter-btn')}>
+                <Button outline large className={cx('applyfilter-btn')} onClick={applyFilter}>
                     Apply
                 </Button>
             </div>

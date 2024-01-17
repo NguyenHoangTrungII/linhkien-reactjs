@@ -11,6 +11,8 @@ function BreadcrumbsComponent() {
     const location = useLocation();
     const [pathSegments, setPathSegments] = useState([]);
 
+    console.log(products);
+
     useEffect(() => {
         const segments = location.pathname.split('/').filter(Boolean);
         setPathSegments(segments);
@@ -22,7 +24,7 @@ function BreadcrumbsComponent() {
     };
 
     const findName = (id) => {
-        const foundProduct = products.find((product) => product._id.toString() === id);
+        const foundProduct = products.find((product) => product.ProductId === id);
 
         return foundProduct ? foundProduct.name : '';
     };

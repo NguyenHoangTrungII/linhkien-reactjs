@@ -11,10 +11,11 @@ export const getAllCategories = () => {
         });
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/category/`, {
+                fetch(`${API_URL}/Category/`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json; charset=utf-8',
+                        'Access-Control-Allow-Origin': '*',
                     },
                     method: 'GET',
                 }),

@@ -18,19 +18,20 @@ function QtyButton({ className, inputStyle = '', updateQuantity, product, isQuan
 
         if (!isQuantity) {
             setqty((prevQty) => prevQty + 1);
-            dispatch(updateQuantity(product._id, updatedQty, qty));
+            dispatch(updateQuantity(product.productId, updatedQty, qty));
         } else {
             setqty((prevQty) => prevQty + 1);
         }
     };
 
     const handleMinsQty = () => {
+        const updatedQty = qty - 1;
         if (qty >= 2) {
             if (!isQuantity) {
-                setqty(qty - 1);
-                dispatch(updateQuantity(product._id, qty, qty - 1));
+                setqty((prevQty) => prevQty - 1);
+                dispatch(updateQuantity(product.productId, updatedQty, qty));
             } else {
-                setqty(qty - 1);
+                setqty((prevQty) => prevQty - 1);
             }
         }
     };

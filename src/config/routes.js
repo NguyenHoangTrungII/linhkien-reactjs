@@ -1,6 +1,6 @@
 const routes = {
     home: '/',
-    accountdetail: '/AccountDetail',
+    accountdetail: '/Account/:name',
     wishlist: '/WishList',
     login: '/LogIn',
     signup: '/SignUp',

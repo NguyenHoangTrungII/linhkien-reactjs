@@ -25,6 +25,9 @@ function Cart() {
     }, []);
     const dispatch = useDispatch();
     const data = useSelector((state) => state.cart.cartItems);
+
+    console.log('data in cart', data);
+
     return (
         <Tippy
             interactive
@@ -38,9 +41,9 @@ function Cart() {
 
                         {data.length > 0 ? (
                             <>
-                                {data.slice(0, 5).map((result) => (
-                                    <CardHorizontal key={result._id} data={result} isPrice={true} />
-                                ))}
+                                {/* {data.slice(0, 5).map((result) => (
+                                    <CardHorizontal key={result.id} data={result} isPrice={true} />
+                                ))} */}
 
                                 {data.length > 5 && (
                                     <h4 className={cx('cart-bottom')}>

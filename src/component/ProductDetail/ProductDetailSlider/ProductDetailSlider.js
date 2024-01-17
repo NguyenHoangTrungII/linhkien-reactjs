@@ -21,6 +21,8 @@ const ProductDetailSlider = () => {
         setIndexThumbnail(index);
     };
 
+    console.log(productdetail);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('row')}>
@@ -45,7 +47,7 @@ const ProductDetailSlider = () => {
                                           key={index}
                                           onClick={() => handleOnClickImg(index)}
                                       >
-                                          <img className={cx('gallery-img')} src={item.url} alt="abc" />
+                                          <img className={cx('gallery-img')} src={item.images} alt="abc" />
                                       </div>
                                   );
                               })}
@@ -55,7 +57,7 @@ const ProductDetailSlider = () => {
                     <div className={cx('thumbnail')}>
                         <img
                             className={cx('thumbnail-img')}
-                            src={productdetail[0].images[indexThumbnail].url}
+                            src={productdetail[0].images[indexThumbnail].images}
                             alt={productdetail.name}
                         />
                     </div>

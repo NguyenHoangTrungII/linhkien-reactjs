@@ -11,10 +11,11 @@ export const getAllBrands = () => {
         });
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/category/`, {
+                fetch(`${API_URL}/Brand/`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json; charset=utf-8',
+                        'Access-Control-Allow-Origin': '*',
                     },
                     method: 'GET',
                 }),

@@ -19,7 +19,7 @@ const useCart = () => {
     // };
 
     const addToCart = (product) => {
-        dispatch(dispatchAddToCart(product._id));
+        dispatch(dispatchAddToCart(product.id));
 
         // if (isItemOnCart(product._id)) {
         //     dispatch(removeFromCart(product._id));

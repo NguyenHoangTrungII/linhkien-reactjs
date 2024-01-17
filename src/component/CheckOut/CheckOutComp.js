@@ -6,7 +6,7 @@ import CartCheckOut from './Component/CartCheckOut/CartCheckOut';
 
 const cx = classNames.bind(styles);
 
-function CheckOutComp() {
+function CheckOutComp({ cart }) {
     const rowClass = cx('row', 'checkout-container');
     const col1Class = cx('col-xl-6', 'col-lg-6', 'col-md-6', 'billing-wrapper');
     const col2Class = cx('col-xl-6', 'col-lg-6', 'col-md-6', 'detail-wrapper');
@@ -18,7 +18,7 @@ function CheckOutComp() {
             </div>
             {/* <CheckOutComp /> */}
             <div className={col2Class}>
-                <CartCheckOut className={cx('detail')} />
+                <CartCheckOut className={cx('detail')} cart={cart} />
             </div>
         </div>
     );

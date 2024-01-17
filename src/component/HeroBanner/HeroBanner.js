@@ -14,9 +14,9 @@ function HeroBanner({ data }) {
                 <div className={cx('category-inner')}>
                     {data.map((item, index) => (
                         <Link
-                            key={item._id}
+                            key={item.id}
                             className={cx('item-list')}
-                            to={`/productList/advanced-search?category=${item._id}`}
+                            to={`/productList/advanced-search?categoryId=${item.id}&PageIndex=1&PageSize=9`}
                         >
                             {item.name}
                         </Link>

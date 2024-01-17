@@ -9,12 +9,13 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const ADD_QTY_ITEM = 'ADD_QTY_ITEM';
 export const CLEAR_CART = 'CLEAR_CART';
 export const MINUS_QTY_ITEM = 'MINUS_QTY_ITEM';
+export const UPDATE_CART = 'UPDATE_CART';
 
 export const fetchCart = () => {
     return async (dispatch, getState) => {
         const user = getState().auth.user;
-
-        if (user.user._id !== undefined) {
+        console.log('user', user.id);
+        if (user.id !== undefined) {
             dispatch({
                 type: CART_LOADING,
             });
@@ -24,7 +25,7 @@ export const fetchCart = () => {
                         headers: {
                             Accept: 'application/json',
                             'Content-Type': 'application/json; charset=utf-8',
-                            Tokens: ` ${user.token}`,
+                            Authorization: `Bearer ${user.token}`,
                         },
                         method: 'GET',
                     }),
@@ -36,11 +37,11 @@ export const fetchCart = () => {
                     throw new Error("Something went wrong!, can't get your carts");
                 }
                 const resData = await response.json();
-                console.log(resData);
-                if (resData.cart != null) {
+                console.log('fetch cart', resData.data.items);
+                if (resData.data.items != null) {
                     dispatch({
                         type: FETCH_CART,
-                        carts: resData.cart.items,
+                        carts: resData.data.items,
                         // total: resData.cart.totalPrice + 50000,
                         // totalnoship: resData.cart.totalPrice,
                     });
@@ -67,14 +68,14 @@ export const addToCart = (itemId) => {
         });
         const user = getState().auth.user;
 
-        console.log('user-addtocart from cartaction', user);
+        console.log('user-addtocart from cartaction', user.token);
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/cart/${itemId}`, {
+                fetch(`${API_URL}/cart/add-to-cart/${itemId}`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
-                        Tokens: user.token,
+                        Authorization: `Bearer ${user.token}`,
                     },
                     method: 'POST',
                     body: JSON.stringify({
@@ -85,7 +86,8 @@ export const addToCart = (itemId) => {
 
             const resData = await response.json();
 
-            let cartItem = resData.updatedProduct;
+            let cartItem = resData.data;
+            console.log(cartItem);
 
             if (!response.ok) {
                 dispatch({
@@ -116,7 +118,7 @@ export const removeFromCart = (itemId) => {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
-                        Tokens: user.token,
+                        Authorization: `Bearer ${user.token}`,
                     },
                     method: 'DELETE',
                 }),
@@ -136,6 +138,7 @@ export const removeFromCart = (itemId) => {
         }
     };
 };
+
 export const updateQuantity = (itemId, qty, oldqty) => {
     return async (dispatch, getState) => {
         dispatch({
@@ -149,7 +152,7 @@ export const updateQuantity = (itemId, qty, oldqty) => {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
-                        Tokens: user.token,
+                        Authorization: `Bearer ${user.token}`,
                     },
                     method: 'PATCH',
                     body: JSON.stringify({
@@ -165,7 +168,7 @@ export const updateQuantity = (itemId, qty, oldqty) => {
             }
 
             const resData = await response.json();
-            let carts = resData.cart.items;
+            let carts = resData.data;
 
             if (oldqty - qty === 1) {
                 // dispatch({
@@ -174,7 +177,7 @@ export const updateQuantity = (itemId, qty, oldqty) => {
                 // });
 
                 dispatch({
-                    type: FETCH_CART,
+                    type: UPDATE_CART,
                     carts: carts,
                 });
             } else {
@@ -184,7 +187,7 @@ export const updateQuantity = (itemId, qty, oldqty) => {
                 // });
 
                 dispatch({
-                    type: FETCH_CART,
+                    type: UPDATE_CART,
                     carts: carts,
                 });
             }
@@ -206,7 +209,7 @@ export const resetCart = (cartId) => {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
-                        'auth-token': user.token,
+                        Authorization: `Bearer ${user.token}`,
                     },
                     method: 'DELETE',
                 }),

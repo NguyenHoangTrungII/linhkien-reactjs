@@ -87,7 +87,6 @@ export const Login = (username, password) => {
             if (!response.ok) {
                 const error = await response.json();
 
-                console.log(error);
                 dispatch({
                     type: AUTH_FAILURE,
                     error,
@@ -95,14 +94,14 @@ export const Login = (username, password) => {
                 throw new Error(error.err);
             }
             const resData = await response.json();
-            // console.log(resData.name);
-            saveDataToStorage('user', resData);
+            console.log(resData);
+            saveDataToStorage('user', resData.data);
             dispatch(setLogoutTimer(60 * 60 * 1000));
             dispatch({
                 type: LOGIN,
-                user: resData,
-                name: resData.user.name,
-                address: resData.user.address,
+                user: resData.data,
+                name: resData.data.userName,
+                avatar: resData.avatar,
             });
         } catch (err) {
             throw err;
@@ -169,19 +168,17 @@ export const uploadAvatar = (file) => {
             type: AUTH_LOADING,
         });
         try {
-            console.log('đã vào nha');
             const formData = new FormData();
-            formData.append('userId', user._id);
-            formData.append('avatar', file);
+            formData.append('Avatar', file);
 
             const response = await timeoutPromise(
-                fetch(`${API_URL}/auth/photo`, {
+                fetch(`${API_URL}/user/avatar`, {
                     headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                        Tokens: user.token,
+                        // Accept: 'application/json',
+                        // 'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${user.token}`,
                     },
-                    method: 'POST',
+                    method: 'PATCH',
                     body: formData,
                 }),
             );
@@ -194,11 +191,11 @@ export const uploadAvatar = (file) => {
                 Error(errorResData.err);
             }
 
-            const resData = response;
+            const resData = await response.json();
 
             dispatch({
                 type: UPLOAD_IMAGE,
-                imageUrl: resData,
+                imageUrl: resData.message,
             });
         } catch (err) {
             throw err;

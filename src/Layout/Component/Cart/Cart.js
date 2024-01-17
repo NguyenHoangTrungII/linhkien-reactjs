@@ -58,7 +58,7 @@ function Cart() {
                         <h4 className={cx('search-title')}>Product</h4>
 
                         {searchResult.slice(0, 5).map((result) => (
-                            <CardHorizontal key={result._id} data={result} />
+                            <CardHorizontal key={result.id} data={result} />
                         ))}
                     </PopperWrapper>
                 </div>

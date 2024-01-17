@@ -31,7 +31,7 @@ function Cart() {
         <div style={{ paddingTop: 100 }}>
             {isLoading && <OverlayLoading isLoading={isLoading} />}
             <BreadcrumbsComponent />
-            <CartDetail cart={cart} />
+            <CartDetail cart={cart.cartItems} />
         </div>
     );
 }

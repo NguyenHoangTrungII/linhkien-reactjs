@@ -1,0 +1,88 @@
+
+.root {
+    display: flex;
+  }
+  
+  .drawer {
+    width: 240px;
+    flex-shrink: 0;
+    height: 100%;
+
+  }
+  
+  .drawerPaper {
+    width: 240px;
+    height: 0 !important;
+
+  }
+  
+  .menu-list{
+    padding-top: 200px;
+    height: 400px;
+
+  }
+
+  .content {
+    flex-grow: 1;
+    padding: 16px; 
+
+  }
+
+  //upload avatar
+
+  .upload-wrapper{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+
+
+    // width: 200px;
+  }
+
+  .upload-avatar {
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50% !important;
+    overflow: hidden; 
+    position: 'relative';
+    // border: 1 solid #DB4444;
+
+   
+}
+
+  .upload-button{
+    position: 'absolute';
+    bottom: 0;
+    right: -100px;
+    transform: 'translate(50%, 50%)';
+  }
+
+  .upload-button-icon{
+    font-size: 30px !important;
+    
+  }
+
+  .avatar-overlay {
+    position: absolute;
+    top: 90px;
+    left: 55px;
+    // width: 100%;
+    // height: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .camera-icon {
+    color: var(--primary);
+    font-size: 36px !important;
+  }
+  
+
+  //Input
+
+  .account-input{
+    width: 30%;
+    margin:  0 10px 0 10px;
+  }

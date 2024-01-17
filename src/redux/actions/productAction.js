@@ -17,7 +17,7 @@ export const getAllProduct = () => {
 
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/product/`, {
+                fetch(`${API_URL}/product`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json;charset=utf-8 ',
@@ -33,9 +33,11 @@ export const getAllProduct = () => {
 
             const resData = await response.json();
 
+            console.log('in redux product get all', resData.data);
+
             dispatch({
                 type: FETCH_PRODUCTS,
-                products: resData,
+                products: resData.data,
             });
         } catch (err) {
             throw err;
@@ -50,7 +52,7 @@ export const getProductByID = (productid) => {
         });
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/product/${productid}`, {
+                fetch(`${API_URL}/product/byid/${productid}`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json;charset=utf-8 ',
@@ -67,11 +69,9 @@ export const getProductByID = (productid) => {
             }
             const resData = await response.json();
 
-            console.log('aaa', resData);
-
             dispatch({
                 type: FETCH_PRODUCTSBYID,
-                productsbyID: resData,
+                productsbyID: resData.data,
             });
         } catch (err) {
             throw err;
@@ -156,7 +156,7 @@ export const getProductFilter = (params) => {
         });
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/product/advanced-search?${params.toString()}`, {
+                fetch(`${API_URL}/product/public/advanced-search?${params.toString()}`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json; charset=utf-8',
@@ -177,7 +177,7 @@ export const getProductFilter = (params) => {
 
             dispatch({
                 type: FETCH_PRODUCTFILTER,
-                productFilter: resData,
+                productFilter: resData.data,
             });
         } catch (err) {
             throw err;

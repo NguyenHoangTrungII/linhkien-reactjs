@@ -13,11 +13,12 @@ import { useCallback } from 'react';
 const cx = classNames.bind(styles);
 
 function ProductCard({ product, addToCart, toast = false }) {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const onClickItem = () => {
         if (!product) return;
 
-        history(`/ProductDetail/${product._id}`);
+        navigate(`/ProductDetail/${product.id}`);
+        window.scrollTo(0, 0);
     };
 
     const handleAddToCart = useCallback(() => {
@@ -25,14 +26,13 @@ function ProductCard({ product, addToCart, toast = false }) {
         !!toast && toast();
     }, [addToCart, product, toast]);
 
-    const image = product.images.filter((image) => image.isThumbnail === true);
-
+    console.log();
     return (
         <div className={cx('wrapper')}>
             <div className={cx('product')}>
                 <div className={cx('product-img')}>
                     <div className={cx('img-product')}>
-                        <img src={image[0].url} alt={product.name} />
+                        <img src={product.images[0].images} alt={product.name} />
                     </div>
                     <div className={cx('product-label')}>
                         {/* <span className={cx('sale')}>-30%</span> */}

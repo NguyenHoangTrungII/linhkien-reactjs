@@ -34,6 +34,8 @@ function Home() {
         fetching();
     }, [dispatch]);
 
+    console.log(productList);
+
     return (
         <div>
             {isLoading && <OverlayLoading isLoading={isLoading} />}
