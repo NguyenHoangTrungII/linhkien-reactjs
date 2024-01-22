@@ -68,8 +68,8 @@ npm start
 - Payment Methods:  COD, credit card.
   
 ## :star: Technical details
-- ReactJS
-- Redux
-- UI framework:
-- Icon: antd, MUI.
-- .v.v.v.
+- Frontend: ReactJS, Redux
+- Backend: Nodejs
+- Libary:
+  + Icon: antd, MUI.
+
