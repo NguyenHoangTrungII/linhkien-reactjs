@@ -70,6 +70,5 @@ npm start
 ## :star: Technical details
 - Frontend: ReactJS, Redux
 - Backend: Nodejs
-- Libary:
-  + Icon: antd, MUI.
+- Libary: antd, MUI.
 
