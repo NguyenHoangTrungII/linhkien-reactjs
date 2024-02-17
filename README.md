@@ -44,7 +44,8 @@ npm start
   ![image](https://github.com/NguyenHoangTrungII/linhkien-reactjs/assets/101980170/3b786580-f206-4d32-b8fe-feb466969a4f)
 
 - Product Detail
-  
+  ![ProductDetail](https://github.com/NguyenHoangTrungII/linhkien-reactjs/assets/101980170/e4f6436c-005c-4f8e-aaf2-5a1082a36d16)
+
 - Product List
   ![image](https://github.com/NguyenHoangTrungII/linhkien-reactjs/assets/101980170/a0fbf0bf-871b-424d-ba59-7772257c4114)
 
