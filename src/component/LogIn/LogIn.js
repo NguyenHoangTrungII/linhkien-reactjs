@@ -32,11 +32,11 @@ function LogInComp() {
     const handleSubmit = async () => {
         try {
             console.log(email, password);
-            const loginPromise = dispatch(Login(email, password));
+            const loginPromise = dispatch(await Login(email, password));
             await toast.promise(loginPromise, {
                 pending: 'Logging in...',
                 success: 'Logged in successfully ',
-                error: error.error,
+                error: error.message,
             });
             navigate('/');
         } catch (err) {
@@ -70,6 +70,7 @@ function LogInComp() {
                             placeholder={'Password'}
                             value={password}
                             setValue={handlePasswordChange}
+                            type="password"
                         />
                     </div>
 

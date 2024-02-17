@@ -22,37 +22,167 @@ import {
 } from '@mui/material';
 import FormControlContext from '@mui/material/FormControl/FormControlContext';
 // import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Radio } from 'antd';
 import { Label, RadioButtonChecked, RemoveCircleOutline } from '@mui/icons-material';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { calculateTotal } from '~/helpers/totalCaculate';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { CreateOrder, payment, paymentCallBack } from '~/redux/actions/orderAction';
+import usePayment from '~/hooks/usePayment';
+import { constructURLSearchParams } from '~/helpers/constructURLSearchParams';
+import { Link, useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function CartCheckOut({ className, cart = [] }) {
+function CartCheckOut({ className, cart = [], billingData }) {
+    const dispatch = useDispatch();
+    const paymentURL = usePayment();
+    const paymentCallBackContent = useSelector((state) => state.order.paymentCallBack);
     const [status, setStatus] = useState(false);
+    const [isRadioChecked, setIsRadioChecked] = useState(false);
     const [link, setLink] = useState('');
+    const [formData, setFormData] = useState({
+        orderType: '',
+        amount: 10000,
+        orderDescription: '',
+        name: '',
+    });
+    const urlParams = new URLSearchParams(window.location.search);
+    const vnp_Amount = urlParams.get('vnp_Amount');
+    const params = constructURLSearchParams();
+    const cartItem = useSelector((state) => state.cart.cartItems);
+
+    const [sentData, setSentData] = useState({
+        ...billingData,
+        total: 1000,
+        details: null,
+    });
+
+    const fetchingPayment = async (data) => {
+        try {
+            await dispatch(paymentCallBack(data));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleRadioChange = () => {
+        setStatus(isRadioChecked);
+
+        setIsRadioChecked(!isRadioChecked);
+    };
+
+    useEffect(() => {
+        if (params.toString() !== '') {
+            console.log('vào');
+            fetchingPayment(params);
+        }
+    }, []);
 
     const [open, openchange] = useState(false);
-    console.log(cart);
+
     const functionopenpopup = () => {
         openchange(true);
-
-        //dont shoule, will change soon
-        setStatus(!status);
     };
 
     const closepopup = () => {
         openchange(false);
     };
 
-    const handlePayment = () => {};
-
     const handlePlaceOrderButton = () => {
         setStatus(!status);
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const fetching = async (formData) => {
+        try {
+            await dispatch(payment(formData));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        setLink(paymentURL);
+        if (link !== '') {
+            window.location.href = paymentURL;
+        }
+    }, [paymentURL]);
+
+    const fetchpaymentCallBack = async (params) => {
+        try {
+            await dispatch(paymentCallBack(params));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        if (!!vnp_Amount) {
+            fetchpaymentCallBack(urlParams);
+        }
+    }, [window.location.search]);
+
+    window.onbeforeunload = function () {
+        window.location.reload();
+    };
+
+    const handleSubmit = async () => {
+        try {
+            console.log('Data to be sent:', formData);
+
+            await fetching(formData);
+        } catch (error) {
+            console.error('Error handling submit:', error);
+        }
+    };
+
+    const filterDetail = (cart) => {
+        if (Array.isArray(cartItem) && cartItem.length > 0) {
+            const selectedProperties = cartItem.map((item) => ({
+                productId: item.productId,
+                quantity: item.quantity,
+                price: item.product.price,
+            }));
+
+            return selectedProperties;
+        }
+    };
+
+    const generateInformationOrder = (billingData, cart) => {
+        var newInfo = {
+            ...billingData,
+            status: '1',
+            total: parseFloat(
+                cart.length > 0 && calculateTotal(cart.map((item) => item.product.price * item.quantity)),
+            ),
+            details: filterDetail(cart),
+        };
+
+        return newInfo;
+    };
+
+    console.log(generateInformationOrder(billingData, cart));
+
+    const createOrder = async () => {
+        try {
+            await dispatch(CreateOrder(generateInformationOrder(billingData, cart)));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handlePlaceOrder = () => {
+        createOrder();
     };
 
     return (
@@ -119,26 +249,16 @@ function CartCheckOut({ className, cart = [] }) {
                 </div>
                 <input type="radio" name="payment" className={cx('radio-payment')} /> Cash on delivery */}
                 <div className={cx('payment-bank')}>
-                    {/* <Radio
-                        onClick={functionopenpopup}
-                        text="Bank"
-                        // color="#DB4444"
+                    <input
+                        type="radio"
                         className={cx('radiobtn')}
                         name="radio-buttons"
-                    /> */}
-                    <input type="radio" className={cx('radiobtn')} name="radio-buttons" onClick={functionopenpopup} />
+                        onClick={functionopenpopup}
+                        checked={paymentCallBackContent.success ? paymentCallBackContent.success : false}
+                        disabled={paymentCallBackContent.success ? paymentCallBackContent.success : false}
+                    />
 
-                    {/* <Button onClick={functionopenpopup} color="primary" variant="contained">
-                        Open Popup
-                    </Button> */}
-
-                    <Dialog
-                        // fullScreen
-                        open={open}
-                        onClose={closepopup}
-                        fullWidth
-                        maxWidth="sm"
-                    >
+                    <Dialog open={open} onClose={closepopup} fullWidth maxWidth="sm">
                         <DialogTitle className={cx('heading-dialog')}>
                             <h1 className={cx('title')}>Billing Details</h1>
                             <IconButton onClick={closepopup} style={{ float: 'right' }}>
@@ -149,20 +269,40 @@ function CartCheckOut({ className, cart = [] }) {
                             {/* <DialogContentText>Do you want remove this user?</DialogContentText> */}
                             <Stack spacing={2} margin={2}>
                                 <span className={cx('input-title')}>Order type:</span>
-                                <TextField className={cx('input-title')} variant="outlined"></TextField>
+                                <TextField
+                                    name="orderType"
+                                    className={cx('input-title')}
+                                    variant="outlined"
+                                    onChange={handleChange}
+                                    value={formData.orderType}
+                                ></TextField>
                                 <span className={cx('input-title')}>Name</span>
-                                <TextField className={cx('input-title')} variant="outlined"></TextField>
+                                <TextField
+                                    name="name"
+                                    className={cx('input-title')}
+                                    variant="outlined"
+                                    onChange={handleChange}
+                                    value={formData.name}
+                                ></TextField>
                                 <span className={cx('input-title')}>Total</span>
                                 <TextField
+                                    name="amount"
                                     className={cx('input-title')}
                                     variant="outlined"
                                     disabled
                                     defaultValue="100"
+                                    value={formData.amount}
                                 ></TextField>
                                 <span className={cx('input-title')}>Content</span>
-                                <TextField className={cx('input-title')} variant="outlined"></TextField>
+                                <TextField
+                                    name="orderDescription"
+                                    className={cx('input-title')}
+                                    variant="outlined"
+                                    onChange={handleChange}
+                                    value={formData.orderDescription}
+                                ></TextField>
 
-                                <Button color="outline" onClick={handlePayment} variant="contained" href={link}>
+                                <Button color="outline" onClick={handleSubmit} variant="contained">
                                     PAYMENT NOW
                                 </Button>
                             </Stack>
@@ -183,7 +323,9 @@ function CartCheckOut({ className, cart = [] }) {
                         type="radio"
                         className={cx('COD-option')}
                         name="radio-buttons"
-                        onClick={handlePlaceOrderButton}
+                        onClick={handleRadioChange}
+                        checked={isRadioChecked}
+                        disabled={paymentCallBackContent.success ? paymentCallBackContent.success : false}
                     />
 
                     <div>
@@ -200,7 +342,7 @@ function CartCheckOut({ className, cart = [] }) {
                 </Button>
             </div>
 
-            <Button primary className={cx('placeorder-btn')} disable={!status}>
+            <Button primary className={cx('placeorder-btn')} disable={status} onClick={handlePlaceOrder}>
                 Place Order
             </Button>
         </div>

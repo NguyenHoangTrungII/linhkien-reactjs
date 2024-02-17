@@ -15,7 +15,7 @@ const initialState = {
     categorieslist: [],
     productsbyname: [],
     productsbyID: [],
-    productFilter: [],
+    productFilter: { data: [], pageIndex: 0, totalPage: 0, totalRecord: 0, totalRecordAll: 0 },
     isFirstOpen: false,
     isLoading: false,
     isLoadingSearch: false,
@@ -37,7 +37,7 @@ export const productReducer = (state = initialState, action) => {
         case FETCH_PRODUCTS:
             return {
                 ...state,
-                products: [...action.products],
+                products: action.products,
                 isLoading: false,
             };
 
@@ -57,9 +57,16 @@ export const productReducer = (state = initialState, action) => {
             };
         }
         case FETCH_PRODUCTFILTER: {
+            console.log(action);
             return {
                 ...state,
-                productFilter: [...action.productFilter],
+                productFilter: {
+                    data: [...action.productFilter],
+                    pageIndex: action.pageIndex,
+                    totalPage: action.totalPage,
+                    totalRecord: action.totalRecord,
+                    totalRecordAll: action.totalRecordAll,
+                },
                 isLoading: false,
             };
         }

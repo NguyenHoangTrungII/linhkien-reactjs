@@ -10,7 +10,7 @@ import { uploadAvatar } from '~/redux/actions/authAction';
 
 const cx = classNames.bind(styles);
 
-const UploadAvatar = () => {
+const UploadAvatar = ({ img }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const dispatch = useDispatch();
 
@@ -47,7 +47,7 @@ const UploadAvatar = () => {
                 <div className={cx('upload-avatar')}>
                     <Avatar
                         alt="Avatar"
-                        src={selectedFile ? URL.createObjectURL(selectedFile) : ''}
+                        src={selectedFile ? URL.createObjectURL(selectedFile) : img}
                         className={cx('upload-avatar')}
                     />
                 </div>

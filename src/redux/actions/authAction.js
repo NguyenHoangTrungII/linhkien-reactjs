@@ -101,7 +101,7 @@ export const Login = (username, password) => {
                 type: LOGIN,
                 user: resData.data,
                 name: resData.data.userName,
-                avatar: resData.avatar,
+                // avatar: resData.avatar,
             });
         } catch (err) {
             throw err;
@@ -216,7 +216,7 @@ export const ResetPassword = (password) => {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
-                        Tokens: user.token,
+                        Authorization: `Bearer ${user.token}`,
                     },
                     method: 'PATCH',
                     body: JSON.stringify({
@@ -240,54 +240,54 @@ export const ResetPassword = (password) => {
     };
 };
 
-export const Logout = (password) => {
-    return async (dispatch, getState) => {
-        const user = getState().auth.user;
+// export const Logout = (password) => {
+//     return async (dispatch, getState) => {
+//         const user = getState().auth.user;
 
-        dispatch({
-            type: AUTH_LOADING,
-        });
-        try {
-            const response = await timeoutPromise(
-                fetch(`${API_URL}/auth/logout`, {
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                        Tokens: user.token,
-                    },
-                    method: 'POST',
-                }),
-            );
-            if (!response.ok) {
-                const errorResData = await response.json();
-                dispatch({
-                    type: AUTH_FAILURE,
-                });
-                throw new Error(errorResData.err);
-            }
-            clearLogoutTimer();
-            localStorage.removeItem('user');
-            dispatch({
-                type: LOGOUT,
-                user: {},
-            });
-        } catch (err) {
-            throw err;
-        }
-    };
-};
-
-//Logout
-// export const Logout = () => {
-//     return (dispatch) => {
-//         clearLogoutTimer();
-//         localStorage.removeItem('user');
 //         dispatch({
-//             type: LOGOUT,
-//             user: {},
+//             type: AUTH_LOADING,
 //         });
+//         try {
+//             const response = await timeoutPromise(
+//                 fetch(`${API_URL}/auth/logout`, {
+//                     headers: {
+//                         Accept: 'application/json',
+//                         'Content-Type': 'application/json',
+//                         Tokens: user.token,
+//                     },
+//                     method: 'POST',
+//                 }),
+//             );
+//             if (!response.ok) {
+//                 const errorResData = await response.json();
+//                 dispatch({
+//                     type: AUTH_FAILURE,
+//                 });
+//                 throw new Error(errorResData.err);
+//             }
+//             clearLogoutTimer();
+//             localStorage.removeItem('user');
+//             dispatch({
+//                 type: LOGOUT,
+//                 user: {},
+//             });
+//         } catch (err) {
+//             throw err;
+//         }
 //     };
 // };
+
+//Logout
+export const Logout = () => {
+    return (dispatch) => {
+        clearLogoutTimer();
+        localStorage.removeItem('user');
+        dispatch({
+            type: LOGOUT,
+            user: {},
+        });
+    };
+};
 
 //Auto log out
 let timer;
@@ -296,6 +296,7 @@ const clearLogoutTimer = () => {
         clearTimeout(timer);
     }
 };
+
 const setLogoutTimer = (expirationTime) => {
     return (dispatch) => {
         timer = setTimeout(async () => {

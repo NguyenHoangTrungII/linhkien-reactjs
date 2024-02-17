@@ -1,0 +1,11 @@
+
+.footer-tab{
+    display: flex;
+    justify-content : end;
+  }
+  
+  .MuiPagination-root.Mui-selected {
+    button {
+      background-color: red ;
+   }
+  }

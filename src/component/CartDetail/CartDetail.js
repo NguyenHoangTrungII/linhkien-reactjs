@@ -110,7 +110,7 @@ function CartDetail({ cart }) {
                 <Button outline href={'/'}>
                     Return To Shop
                 </Button>
-                {/* <Button outline>Update Cart</Button> */}
+                <Button outline>Update Cart</Button>
             </div>
             <div className={cx('col-12', 'col-md-12', 'coupon-wrapper')}>
                 <div className={cx('coupon-apply')}>
@@ -122,63 +122,28 @@ function CartDetail({ cart }) {
 
                 <div className={cx('cart-total')}>
                     {/* total details */}
+                    {/* <div className={cx('cart-total-inner')}> */}
+                    {/* <span className={cx('title')}>Cart Total</span>
+                        <div>
+                            <div className={cx('payment')}>
+                                <span className={cx('text')}>Subtotal:</span>
+                                <span className={cx('price')}>
+                                    <div className={cx('cart-total')}> */}
+                    {/* total details */}
                     <div className={cx('cart-total-inner')}>
                         <span className={cx('title')}>Cart Total</span>
                         <div>
                             <div className={cx('payment')}>
                                 <span className={cx('text')}>Subtotal:</span>
                                 <span className={cx('price')}>
-                                    <div className={cx('cart-total')}>
-                                        {/* total details */}
-                                        <div className={cx('cart-total-inner')}>
-                                            <span className={cx('title')}>Cart Total</span>
-                                            <div>
-                                                <div className={cx('payment')}>
-                                                    <span className={cx('text')}>Subtotal:</span>
-                                                    <span className={cx('price')}>
-                                                        {formatCurrency(
-                                                            cart.length > 0 &&
-                                                                calculateTotal(
-                                                                    cart.map(
-                                                                        (item) =>
-                                                                            parseInt(item.product.price) *
-                                                                            parseInt(item.quantity),
-                                                                    ),
-                                                                ),
-                                                        )}
-                                                    </span>
-                                                </div>
-
-                                                <div className={cx('payment')}>
-                                                    <span className={cx('text')}>Ship:</span>
-                                                    <span className={cx('price')}>{formatCurrency(200000)}</span>
-                                                </div>
-
-                                                <div className={cx('payment')}>
-                                                    <span className={cx('text')}>Total:</span>
-                                                    <span className={cx('price')}>
-                                                        {formatCurrency(
-                                                            parseFloat(
-                                                                cart.length > 0 &&
-                                                                    calculateTotal(
-                                                                        cart.map(
-                                                                            (item) =>
-                                                                                item.product.price * item.quantity,
-                                                                        ),
-                                                                    ),
-                                                            ) + +200000,
-                                                        )}
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <Button primary href={'checkout'}>
-                                                    Procees to checkout
-                                                </Button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {formatCurrency(
+                                        cart.length > 0 &&
+                                            calculateTotal(
+                                                cart.map(
+                                                    (item) => parseInt(item.product.price) * parseInt(item.quantity),
+                                                ),
+                                            ),
+                                    )}
                                 </span>
                             </div>
 
@@ -206,6 +171,34 @@ function CartDetail({ cart }) {
                             </Button>
                         </div>
                     </div>
+                    {/* </div>
+                                </span>
+                            </div> */}
+
+                    {/* <div className={cx('payment')}>
+                            <span className={cx('text')}>Ship:</span>
+                            <span className={cx('price')}>{formatCurrency(200000)}</span>
+                        </div>
+
+                        <div className={cx('payment')}>
+                            <span className={cx('text')}>Total:</span>
+                            <span className={cx('price')}>
+                                {formatCurrency(
+                                    parseFloat(
+                                        cart.length > 0 &&
+                                            calculateTotal(cart.map((item) => item.product.price * item.quantity)),
+                                    ) + +200000,
+                                )}
+                            </span>
+                        </div> */}
+                    {/* </div> */}
+
+                    {/* <div>
+                            <Button primary href={'checkout'}>
+                                Procees to checkout
+                            </Button>
+                        </div> */}
+                    {/* </div> */}
                 </div>
             </div>
         </div>

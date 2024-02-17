@@ -7,9 +7,12 @@ import { getAllBrands } from '~/redux/actions/brandAction';
 import BreadcrumbsComponent from '~/component/Breadcrumbs/Breadcrumbs ';
 import OverlayLoading from '~/component/OverlayLoading/OverlayLoading';
 import { constructURLSearchParams } from '~/helpers/constructURLSearchParams';
+import { useLocation } from 'react-router-dom';
 
 function ProductList() {
     const dispatch = useDispatch();
+    const location = useLocation();
+
     const productsFilter = useSelector((state) => state.store.productFilter);
     const brands = useSelector((state) => state.brand.brands);
     const isLoading = useSelector((state) => state.brand.isLoading);
@@ -38,15 +41,16 @@ function ProductList() {
         };
 
         fetching();
-    }, [dispatch]);
+    }, [dispatch, location]);
 
+    console.log(productsFilter);
     return (
         <div style={{ paddingTop: 100 }}>
             {isLoading && <OverlayLoading isLoading={isLoading} />}
 
             <BreadcrumbsComponent />
 
-            <ProductListComp products={productsFilter} brand={brands} />
+            <ProductListComp products={productsFilter.data} brand={brands} data={productsFilter} />
         </div>
     );
 }

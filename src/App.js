@@ -15,6 +15,7 @@ import { productReducer } from './redux/reducers/productReducer';
 import { authReducer } from './redux/reducers/authReducer';
 import { categoryReducer } from './redux/reducers/categoryReducer';
 import { brandReducer } from './redux/reducers/brandReducer';
+import { orderReducer } from './redux/reducers/orderReducer';
 
 //redux
 const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     category: categoryReducer,
     brand: brandReducer,
+    order: orderReducer,
     form: formReducer,
 });
 

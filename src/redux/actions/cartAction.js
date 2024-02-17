@@ -71,7 +71,7 @@ export const addToCart = (itemId) => {
         console.log('user-addtocart from cartaction', user.token);
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/cart/add-to-cart/${itemId}`, {
+                fetch(`${API_URL}/cart/addToCart/${itemId}`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
@@ -227,5 +227,11 @@ export const resetCart = (cartId) => {
         } catch (err) {
             throw err;
         }
+    };
+};
+
+export const resetCartOrder = () => {
+    return {
+        type: 'RESET_CART',
     };
 };

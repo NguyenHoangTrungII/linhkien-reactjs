@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 import { fetchCart } from '~/redux/actions/cartAction';
 
 function CheckOut() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // const isLoading = useSelector((state) => state.cart.isLoading);
+    const isLoading = useSelector((state) => state.cart.isLoading);
 
     // useEffect(() => {
     //     if (!isLoading) {

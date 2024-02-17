@@ -23,6 +23,8 @@ function ProductDetail() {
         fetching();
     }, [dispatch, IdProduct]);
 
+    console.log();
+
     return (
         <div style={{ paddingTop: 80 }}>
             {isLoading && <OverlayLoading isLoading={isLoading} />}

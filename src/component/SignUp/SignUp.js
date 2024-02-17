@@ -15,27 +15,27 @@ function SignUpComp() {
                 <img src={require('~/public/uploads/login/login_img.png')} alt="anh" />
 
                 {/* form login */}
-                <div className={cx('login-wrapper')}>
-                    <div className={cx('login-inner')}>
-                        <h1 className={cx('login-title')}>Create an account</h1>
-                        <span className={cx('login-subtitle')}>Enter your details below</span>
+                <div className={cx('signup-wrapper')}>
+                    <div className={cx('signup-inner')}>
+                        <h1 className={cx('signup-title')}>Create an account</h1>
+                        <span className={cx('signup-subtitle')}>Enter your details below</span>
 
-                        <div className={cx('login-input')}>
+                        <div className={cx('signup-input')}>
                             <InputText lineunder className={cx('name')} placeholder={'Name'} />
                             <InputText lineunder className={cx('email')} placeholder={'Email or Phone Number'} />
-                            <InputText lineunder className={cx('password')} placeholder={'Password'} />
+                            <InputText type="password" lineunder className={cx('password')} placeholder={'Password'} />
                         </div>
 
-                        <div className={cx('login-footer')}>
-                            <Button primary className={cx('btn-login')}>
+                        <div className={cx('signup-footer')}>
+                            <Button primary className={cx('btn-signup')}>
                                 Log in
                             </Button>
                             <Button outline className={cx('btn-forgot')} Lefticon={<GoogleOutlined />}>
                                 Forget Password?
                             </Button>
-                            <span className={cx('remind-login')}>
+                            <span className={cx('remind-signup')}>
                                 Already have account?
-                                <Button text className={cx('login-text')}>
+                                <Button text className={cx('signup-text')} to={'/login'}>
                                     Log in
                                 </Button>
                             </span>

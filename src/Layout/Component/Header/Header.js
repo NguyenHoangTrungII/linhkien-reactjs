@@ -36,7 +36,6 @@ import {
 import Tippy from '@tippyjs/react/headless';
 import { useSelector, useDispatch } from 'react-redux';
 
-// import Image from '~/component/image';
 import config from '~/config';
 import styles from './Header.module.scss';
 import Search from './Search';
@@ -91,7 +90,7 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: 'Account/@trung',
+            to: '/Account/@trung',
         },
 
         {
@@ -142,7 +141,7 @@ function Header() {
         setIsActive(!isActive);
     };
 
-    console.log(user);
+    console.log('user avatar in header', user);
 
     return (
         <header className={cx('wrapper')}>
@@ -170,8 +169,7 @@ function Header() {
                             <HeartOutlined className={cx('wishlist-icon')} value={''} />
                         </div>
                         {/* Cart */}
-                        <Cart />
-
+                        {currentUser && <Cart />}
                         {/* Notify */}
                         <Tippy
                             interactive
@@ -199,8 +197,8 @@ function Header() {
                             </div>
                         </Tippy>
 
-                        <Menu items={currentUser ? userMenu : userMenuLogOut} onChange={handlerMenuChange}>
-                            {currentUser ? (
+                        <Menu items={!!currentUser ? userMenu : userMenuLogOut} onChange={handlerMenuChange}>
+                            {!!currentUser ? (
                                 <Image
                                     src={
                                         user.avatar == null

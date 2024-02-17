@@ -16,7 +16,9 @@ import { getAllCategories } from '~/redux/actions/categoryAction';
 import { getProductsByRange } from '~/helpers/getProductByRange';
 
 function Home() {
-    const notify = () => toast('Add To Cart Success');
+    const notify = (message, options) => {
+        toast(message, options);
+    };
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.store.products);
     const categories = useSelector((state) => state.category.categories);

@@ -13,7 +13,7 @@
 
 }
 
-.login-wrapper{
+.signup-wrapper{
     flex: 1;
     display: flex;
     justify-content: center;
@@ -21,7 +21,7 @@
     align-content: center;
 }
 
-.login-inner{
+.signup-inner{
     width: 371px;
 
     display: flex;
@@ -42,38 +42,38 @@
     
 }
 
-.login-title{
+.signup-title{
     font-size: 36px;
     font-weight: 500;
 }
 
-.login-subtitle{
+.signup-subtitle{
     font-size: 16px;
     font-weight: 500;
 }
 
-.login-input{
+.signup-input{
     margin: 40px 0 ;
     display: flex;
     flex-direction: column;
 }
 
 
-.login-footer{
+.signup-footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.btn-login,
+.btn-signup,
 .btn-forgot{
     min-height: 56px;
     font-weight: 200;
     width: 100%;
 }
 
-.btn-login{
+.btn-signup{
     // background-color: var(--primary);
 }
 .btn-forgot{
@@ -83,12 +83,12 @@
 
 
 
-.remind-login{
+.remind-signup{
     font-size: 1.6rem;
     padding-top: 20px;
 }
 
-.login-text {
+.signup-text {
     min-width: 0;
     line-height: 1.6;
     border-bottom: 1px solid #000;

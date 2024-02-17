@@ -33,8 +33,6 @@ export const getAllProduct = () => {
 
             const resData = await response.json();
 
-            console.log('in redux product get all', resData.data);
-
             dispatch({
                 type: FETCH_PRODUCTS,
                 products: resData.data,
@@ -86,7 +84,7 @@ export const getProductByName = (name) => {
         });
         try {
             const response = await timeoutPromise(
-                fetch(`${API_URL}/product/search?productName=${name}`, {
+                fetch(`${API_URL}/Product/byName/${name}`, {
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json;charset=utf-8 ',
@@ -103,11 +101,9 @@ export const getProductByName = (name) => {
             }
             const resData = await response.json();
 
-            console.log('ne he', resData);
-
             dispatch({
                 type: FETCH_PRODUCTBYNAME,
-                productsbyname: resData,
+                productsbyname: resData.data,
             });
         } catch (err) {
             throw err;
@@ -178,6 +174,10 @@ export const getProductFilter = (params) => {
             dispatch({
                 type: FETCH_PRODUCTFILTER,
                 productFilter: resData.data,
+                pageIndex: resData.pageIndex,
+                totalPage: resData.totalPage,
+                totalRecord: resData.totalRecord,
+                totalRecordAll: resData.totalRecordAll,
             });
         } catch (err) {
             throw err;

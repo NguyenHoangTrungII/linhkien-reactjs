@@ -6,12 +6,10 @@ import styles from './Breadcrumbs.module.scss';
 import { useSelector } from 'react-redux';
 
 function BreadcrumbsComponent() {
-    const products = useSelector((state) => state.store.products);
+    const productList = useSelector((state) => state.store.products);
     const history = useNavigate();
     const location = useLocation();
     const [pathSegments, setPathSegments] = useState([]);
-
-    console.log(products);
 
     useEffect(() => {
         const segments = location.pathname.split('/').filter(Boolean);
@@ -24,10 +22,12 @@ function BreadcrumbsComponent() {
     };
 
     const findName = (id) => {
-        const foundProduct = products.find((product) => product.ProductId === id);
+        const foundProduct = productList.find((product) => product.id.toString() === id);
 
         return foundProduct ? foundProduct.name : '';
     };
+
+    console.log(productList);
 
     const cx = classNames.bind(styles);
     return (

@@ -93,7 +93,7 @@ export const authReducer = (state = initialState, action) => {
             };
         case UPLOAD_IMAGE:
             // state.user.profilePicture = action.profilePic;
-            console.log(state.user.avatar);
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa', action.imageUrl);
             state.user.avatar = action.imageUrl;
             console.log(state.user.avatar);
 

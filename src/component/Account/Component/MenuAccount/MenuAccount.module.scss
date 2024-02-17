@@ -83,6 +83,36 @@
   //Input
 
   .account-input{
-    width: 30%;
+    width: 100%;
     margin:  0 10px 0 10px;
+    padding: 10px 0 10px;
   }
+
+  .group-btn{
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+
+    .btn:first-child{
+      margin-right: 10px;
+    }
+  }
+
+
+// .tab-Order{
+//   border: solid 1px red;
+// }
+
+.tabList-Order{
+  text-transform: uppercase;
+  font-weight: 900;
+
+
+}
+
+// .tabList-Order li{
+//   border: solid 2px var(--primary);
+// }
+
+

@@ -9,11 +9,14 @@ import { HeartOutlined } from '@ant-design/icons/lib/icons';
 
 import formatCurrency from '~/helpers/currencyFormatter';
 import { useCallback } from 'react';
+import { checkDateWithin30Days, checkPriceDecreaseOver10Percent } from '~/helpers/checkProductStatus ';
 
 const cx = classNames.bind(styles);
 
 function ProductCard({ product, addToCart, toast = false }) {
     const navigate = useNavigate();
+    const currentUser = !!localStorage.getItem('user');
+
     const onClickItem = () => {
         if (!product) return;
 
@@ -22,11 +25,16 @@ function ProductCard({ product, addToCart, toast = false }) {
     };
 
     const handleAddToCart = useCallback(() => {
-        addToCart(product);
-        !!toast && toast();
+        if (currentUser) {
+            addToCart(product);
+            !!toast && toast('Add to cart success!', { type: 'success', duration: 3000 });
+        } else {
+            !!toast && toast('Authorization is need!', { type: 'error', duration: 3000 });
+        }
     }, [addToCart, product, toast]);
 
-    console.log();
+    console.log(checkPriceDecreaseOver10Percent(product.price, product.oldPrice));
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('product')}>
@@ -35,8 +43,12 @@ function ProductCard({ product, addToCart, toast = false }) {
                         <img src={product.images[0].images} alt={product.name} />
                     </div>
                     <div className={cx('product-label')}>
-                        {/* <span className={cx('sale')}>-30%</span> */}
-                        <span className={cx('new')}>NEW</span>
+                        {checkPriceDecreaseOver10Percent(product.price, product.oldPrice).isDecreasedOver30Percent && (
+                            <span className={cx('sale')}>
+                                {checkPriceDecreaseOver10Percent(product.price, product.oldPrice).percentageDecrease} %
+                            </span>
+                        )}
+                        {/* {checkDateWithin30Days(product.date) && <span className={cx('new')}>NEW</span>} */}
                     </div>
                     <div className={cx('action')}>
                         <div className={cx('wish-list')}>
@@ -62,7 +74,7 @@ function ProductCard({ product, addToCart, toast = false }) {
                         </h3>
                         <h4 className={cx('product-price')}>
                             {formatCurrency(product.price)}
-                            <del className={cx('product-old-price')}>{formatCurrency(product.old_price)}</del>
+                            <del className={cx('product-old-price')}>{formatCurrency(product.oldPrice)}</del>
                         </h4>
                         <div className={cx('product-rating')}>
                             <StarFilled className={cx('star-icon')} />

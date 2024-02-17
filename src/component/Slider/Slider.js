@@ -36,26 +36,26 @@ function Slider({ products = [], arrowVisible = true, rowNumber = 1, slidesToSho
         arrows: arrowVisible,
         rows: rowNumber,
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: slidesToShow,
-        slidesToScroll: 1,
+        slidesToScroll: 20,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: slidesToShow - 1,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true,
+                    //slidesToScroll: 1,
+                    // infinite: true,
+                    // dots: true,
                 },
             },
             {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: slidesToShow - 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2,
+                    // slidesToScroll: 4,
+                    // initialSlide: 1,
                 },
             },
             {

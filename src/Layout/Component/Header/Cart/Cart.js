@@ -41,9 +41,9 @@ function Cart() {
 
                         {data.length > 0 ? (
                             <>
-                                {/* {data.slice(0, 5).map((result) => (
-                                    <CardHorizontal key={result.id} data={result} isPrice={true} />
-                                ))} */}
+                                {data.slice(0, 5).map((result) => (
+                                    <CardHorizontal key={result.id} data={result.product} isPrice={true} />
+                                ))}
 
                                 {data.length > 5 && (
                                     <h4 className={cx('cart-bottom')}>

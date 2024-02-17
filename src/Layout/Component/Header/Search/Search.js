@@ -11,6 +11,7 @@ import { Wrapper as PopperWrapper } from '~/component/Popper';
 import CardHorizontal from '~/component/CardHorizontal';
 import * as searchService from '~/services/searchService';
 import { getProductByName } from '~/redux/actions/productAction';
+import { Empty } from 'antd';
 
 const cx = classNames.bind(styles);
 
@@ -29,32 +30,15 @@ function Search({ className = '' }) {
     const deBounceValue = useDebounce(searchValue, 500);
 
     useEffect(() => {
-        // setLoading(true);
-        // setTimeout(() => setLoading(false), 500);
-
         if (!searchValue.trim()) {
             setsearchResult([]);
             return;
         }
 
-        // const fetchAPI = async () => {
-        //     setLoading(true);
-        //     const result = await searchService.search(deBounceValue);
-        //     // console.log(deBounceValue);
-        //     // console.log(result);
-        //     setsearchResult(result);
-        //     setLoading(false);
-        // };
-
-        // fetchAPI();
-        // eslint-disable-next-line
-
         const fetching = async () => {
             try {
                 setLoading(true);
                 await dispatch(getProductByName(deBounceValue));
-
-                // const result = productListByName;
                 setsearchResult(productListByName);
                 setLoading(false);
             } catch (err) {
@@ -64,8 +48,6 @@ function Search({ className = '' }) {
 
         fetching();
 
-        console.log(productListByName);
-        console.log(isLoading);
         // eslint-disable-next-line
     }, [deBounceValue]);
 
@@ -84,52 +66,27 @@ function Search({ className = '' }) {
         setShowResult(false);
     };
 
-    // console.log('searchResult', searchResult.length > 0);
-    // console.log('showResult', showResult);
-
-    const a = [
-        {
-            name: 'RAM Corsair Vengeance RGB Pro 16GB (2 x 8GB)',
-            _id: '655227f5ee12e8d16b7b2abc',
-            thumbnailUrl:
-                'https://res.cloudinary.com/dew9jv3hy/image/upload/v1688228156/product-cloud/yuil8c8kknqv4lkjqexi.jpg',
-            categoryName: 'RAM',
-            price: '2700000',
-        },
-        {
-            name: 'RAM G.Skill Trident Z RGB 64GB (4 x 16GB)',
-            _id: '65522918ee12e8d16b7b2ae7',
-            thumbnailUrl:
-                'https://res.cloudinary.com/dew9jv3hy/image/upload/v1688228286/product-cloud/xmyljxoyvob5buxpxhs8.jpg',
-            categoryName: 'RAM',
-            price: '8500000',
-        },
-        {
-            name: 'RAM G.Skill Trident Z RGB 64GB (4 x 16GB)',
-            _id: '6552296bee12e8d16b7b2b0d',
-            thumbnailUrl:
-                'https://res.cloudinary.com/dew9jv3hy/image/upload/v1688228394/product-cloud/f5tphkwncshmecepj3ql.png',
-            categoryName: 'RAM',
-            price: '8500000',
-        },
-    ];
     return (
         //ignore Teddy warning
         <HeadlessTippy
             interactive
             placement="top-start"
             offset={[-10, 0]}
-            // inlinePositioning={true}
             visible={showResult && searchResult.length > 0}
             onClickOutside={handleHideResult}
             render={(attrs) => (
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
-                        <h4 className={cx('search-title')}>Product</h4>
-
-                        {productListByName.map((result) => (
-                            <CardHorizontal key={result._id} data={result} isPrice="true" />
-                        ))}
+                        {productListByName.length !== 0 && <h4 className={cx('search-title')}>Product</h4>}
+                        {productListByName.length !== 0 ? (
+                            productListByName.map((result) => (
+                                <CardHorizontal key={result.id} data={result} isPrice="true" />
+                            ))
+                        ) : (
+                            <div className={cx('error-search')}>
+                                <Empty />
+                            </div>
+                        )}
                     </PopperWrapper>
                 </div>
             )}

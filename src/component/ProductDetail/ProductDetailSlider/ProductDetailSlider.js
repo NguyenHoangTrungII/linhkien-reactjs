@@ -10,15 +10,21 @@ import QtyButton from '~/component/QtyButton/QtyButton';
 import Button from '~/component/Button';
 import formatCurrency from '~/helpers/currencyFormatter';
 import Separator from '~/component/Separator';
+import Rating from '@mui/material/Rating';
 
 const cx = classNames.bind(styles);
 
 const ProductDetailSlider = () => {
     const [indexThumbnail, setIndexThumbnail] = useState(0);
     const productdetail = useSelector((state) => state.store.productsbyID);
+    const [value, setValue] = useState(2);
 
     const handleOnClickImg = (index) => {
         setIndexThumbnail(index);
+    };
+
+    const handleChangeRating = (event, newValue) => {
+        setValue(newValue);
     };
 
     console.log(productdetail);
@@ -68,11 +74,12 @@ const ProductDetailSlider = () => {
                             <h3 className={cx('product-name')}>{productdetail[0].name} </h3>
                             <div className={cx('rating')}>
                                 <div className={cx('star')}>
-                                    <StarOutlined />
-                                    <StarOutlined />
-                                    <StarOutlined />
-                                    <StarOutlined />
-                                    <StarOutlined />
+                                    <Rating
+                                        className={cx('custom-star')}
+                                        name="simple-controlled"
+                                        value={value}
+                                        onChange={handleChangeRating}
+                                    />
                                 </div>
                                 <span>{'(150 review)'}</span>
                                 <div className={cx('line')} />
