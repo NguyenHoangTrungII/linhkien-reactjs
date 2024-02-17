@@ -16,9 +16,6 @@
 
 
 ## About project
-
-This project is just developing.
-
 ## :star: Get Started
 ``` bash
 # clone
