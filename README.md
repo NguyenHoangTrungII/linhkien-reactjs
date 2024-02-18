@@ -16,6 +16,8 @@
 	- [Account](#account)
 * [Features](#features)
  * [Technical details](#technical-details)
+ * [Demo](#demo)
+
 
 
 ## About project
@@ -66,10 +68,17 @@ npm start
 - User Profile (Upload, Edit Profile Picture, Address).
 - Add Items to Cart. 
 - Place an Order.
-- Payment Methods:  COD, credit card.
+- Payment Methods:  COD, credit card (VNPay).
   
 ## Technical details
 - Frontend: ReactJS, Redux
-- Backend: Nodejs
-- Libary: antd, MUI.
+- Backend: Nodejs/ .Net Core 7 
+- Libary: antd, MUI, .
+
+## Demo
+
+``` bash
+# clone
+youtube:
+```
 
