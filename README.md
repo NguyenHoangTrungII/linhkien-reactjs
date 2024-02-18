@@ -78,7 +78,7 @@ npm start
 ## Demo
 
 ``` bash
-# clone
-youtube:
+# youtube
+
 ```
 
